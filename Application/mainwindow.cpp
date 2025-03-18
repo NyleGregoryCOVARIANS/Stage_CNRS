@@ -1,14 +1,17 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "fenetreconnexion.h" // Inclure la bonne classe
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+    // Ajoutez un objet Communication avant d'utiliser FenetreConnexion
+    Communication *communication = new Communication();
+    fenetreConnexion = new FenetreConnexion(this, communication); // Spécification explicite du constructeur
+    fenetreConnexion->show();
+
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    delete fenetreConnexion;
 }
