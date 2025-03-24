@@ -30,7 +30,7 @@ public:
     QFrame *frame;
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
-    QPushButton *pushButtonConnection;
+    QPushButton *pushButtonConnexion;
     QPushButton *pushButton;
     QLabel *label;
     QMenuBar *menubar;
@@ -56,10 +56,10 @@ public:
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        pushButtonConnection = new QPushButton(horizontalLayoutWidget);
-        pushButtonConnection->setObjectName("pushButtonConnection");
+        pushButtonConnexion = new QPushButton(horizontalLayoutWidget);
+        pushButtonConnexion->setObjectName("pushButtonConnexion");
 
-        horizontalLayout->addWidget(pushButtonConnection);
+        horizontalLayout->addWidget(pushButtonConnexion);
 
         pushButton = new QPushButton(horizontalLayoutWidget);
         pushButton->setObjectName("pushButton");
@@ -91,7 +91,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        pushButtonConnection->setText(QCoreApplication::translate("MainWindow", "Connection", nullptr));
+        pushButtonConnexion->setText(QCoreApplication::translate("MainWindow", "Connexion", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Parametre Mesure", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">CONFIGURATION</span></p></body></html>", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));

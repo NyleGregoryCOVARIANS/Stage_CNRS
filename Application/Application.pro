@@ -10,22 +10,21 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    communication.cpp \
-    fenetreconnexion.cpp \
+    Classes/Alimentation/alimentation.cpp \
+    Classes/Communication/communication.cpp \
+    Fenetres/Connexion/fenetreconnexion.cpp \
     main.cpp \
-    mainwindow.cpp \
-    ui_fenetreconnexion.cpp
+    Fenetres/MainWindow/mainwindow.cpp \
 
 HEADERS += \
-    communication.h \
-    fenetreconnexion.h \
-    mainwindow.h \
-    ui_fenetreconnexion.h
-
+    Classes/Alimentation/alimentation.h \
+    Classes/Communication/communication.h \
+    Fenetres/Connexion/fenetreconnexion.h \
+    Fenetres/MainWindow/mainwindow.h \
 
 FORMS += \
-    fenetreconnexion.ui \
-    mainwindow.ui
+    Fenetres/Connexion/fenetreconnexion.ui \
+    Fenetres/MainWindow/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

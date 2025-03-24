@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+#include "Fenetres/MainWindow/mainwindow.h""
 
 #include <QApplication>
 
