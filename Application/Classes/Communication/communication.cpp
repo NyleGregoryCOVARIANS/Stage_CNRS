@@ -1,5 +1,4 @@
 #include <QSerialPort>
-
 #include "communication.h"
 
 Communication::Communication()

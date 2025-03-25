@@ -31,7 +31,6 @@ public:
     QWidget *horizontalLayoutWidget;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButtonConnexion;
-    QPushButton *pushButton;
     QLabel *label;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -46,7 +45,7 @@ public:
         centralwidget->setObjectName("centralwidget");
         frame = new QFrame(centralwidget);
         frame->setObjectName("frame");
-        frame->setGeometry(QRect(10, 70, 801, 131));
+        frame->setGeometry(QRect(0, 0, 821, 591));
         frame->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
         frame->setFrameShape(QFrame::Shape::StyledPanel);
         frame->setFrameShadow(QFrame::Shadow::Raised);
@@ -60,11 +59,6 @@ public:
         pushButtonConnexion->setObjectName("pushButtonConnexion");
 
         horizontalLayout->addWidget(pushButtonConnexion);
-
-        pushButton = new QPushButton(horizontalLayoutWidget);
-        pushButton->setObjectName("pushButton");
-
-        horizontalLayout->addWidget(pushButton);
 
         label = new QLabel(frame);
         label->setObjectName("label");
@@ -92,7 +86,6 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         pushButtonConnexion->setText(QCoreApplication::translate("MainWindow", "Connexion", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Parametre Mesure", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">CONFIGURATION</span></p></body></html>", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi

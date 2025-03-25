@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
     Communication *communication = new Communication(); // Crée une instance de communication
     m_fenetreConnexion = new FenetreConnexion(this, communication); // Crée une instance d'une fenêtre de connexion
 
+
+
     connect(m_ui->pushButtonConnexion, &QPushButton::clicked, this, &MainWindow::connexion_button_clicked); // Si le bouton connexion est cliqué, alors lance la fonction connexion_button_clicked() qui affiche la fenêtre de connexion
 
     this->show();

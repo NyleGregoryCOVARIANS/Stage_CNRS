@@ -1,5 +1,6 @@
 #include "fenetreconnexion.h"
 #include "ui_fenetreconnexion.h"
+#include <iostream>
 
 #include <QDebug>
 
@@ -34,10 +35,18 @@ void FenetreConnexion::on_pushButton_rs232_clicked()
     m_com = m_ui->lineEdit->text();
     m_baudRate = m_ui->comboBox->currentText();
     bool estConnecte = m_communication->connexion(m_com, m_baudRate);
+
+    m_communication->envoyer("RE");
+    qDebug() << m_communication->recevoir();
+
+    m_communication->envoyer("EN 508");
+    qDebug() << m_communication->recevoir();
+
     qDebug() << "--------------------------------";
     qDebug() << "Suis-je connecte ? " + QVariant(estConnecte).toString();
     qDebug() << "m_com : " + m_com;
     qDebug() << "m_baudRate : " + m_baudRate;
+
 
 
 
