@@ -36,7 +36,7 @@ void FenetreConnexion::on_pushButton_rs232_clicked()
     m_baudRate = m_ui->comboBox->currentText();
     bool estConnecte = m_communication->connexion(m_com, m_baudRate);
 
-    m_communication->envoyer("RE");
+    m_communication->envoyer("RE"); // Activation du remote
     qDebug() << m_communication->recevoir();
 
     m_communication->envoyer("EN 508");

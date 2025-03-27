@@ -12,13 +12,15 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFrame>
-#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -27,55 +29,433 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QFrame *frame;
-    QWidget *horizontalLayoutWidget;
-    QHBoxLayout *horizontalLayout;
+    QFrame *frame2;
+    QGridLayout *gridLayout;
+    QFrame *frameBalayageY;
+    QGridLayout *_2;
+    QLabel *label_9;
+    QLineEdit *lineEdit_1_4;
+    QFrame *framePositionY;
+    QGridLayout *_3;
+    QLabel *labelPositionY;
+    QLineEdit *lineEditPositionY;
+    QFrame *frameBalayageX;
+    QGridLayout *_4;
+    QLabel *labelBalayageX;
+    QLineEdit *lineEditBalayageX;
+    QFrame *framePositionX;
+    QGridLayout *_5;
+    QLabel *labelPositionX;
+    QLineEdit *lineEditPositionX;
+    QWidget *verticalLayoutWidget;
+    QVBoxLayout *Header;
+    QLabel *label_1;
     QPushButton *pushButtonConnexion;
-    QLabel *label;
+    QFrame *frame1;
+    QVBoxLayout *verticalLayout_2;
+    QFrame *frameEnergie;
+    QGridLayout *_10;
+    QLabel *labelEnergie;
+    QLineEdit *lineEditEnergie;
+    QFrame *frameCourantEmission;
+    QGridLayout *_8;
+    QLabel *labelCourantEmission;
+    QLineEdit *lineEditCourantEmission;
+    QFrame *frameFocus;
+    QGridLayout *_9;
+    QLabel *labelFocus;
+    QLineEdit *lineEditFocus;
+    QFrame *frameWehnelt;
+    QGridLayout *_7;
+    QLineEdit *lineEdiWehnelt;
+    QLabel *labelWehnelt;
+    QPushButton *ValidatePushButton;
     QMenuBar *menubar;
-    QStatusBar *statusbar;
     QToolBar *toolBar;
+    QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(822, 619);
+        MainWindow->resize(832, 841);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        frame = new QFrame(centralwidget);
-        frame->setObjectName("frame");
-        frame->setGeometry(QRect(0, 0, 821, 591));
-        frame->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
-        frame->setFrameShape(QFrame::Shape::StyledPanel);
-        frame->setFrameShadow(QFrame::Shadow::Raised);
-        horizontalLayoutWidget = new QWidget(frame);
-        horizontalLayoutWidget->setObjectName("horizontalLayoutWidget");
-        horizontalLayoutWidget->setGeometry(QRect(0, 70, 791, 61));
-        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
-        horizontalLayout->setObjectName("horizontalLayout");
-        horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        pushButtonConnexion = new QPushButton(horizontalLayoutWidget);
-        pushButtonConnexion->setObjectName("pushButtonConnexion");
+        frame2 = new QFrame(centralwidget);
+        frame2->setObjectName("frame2");
+        frame2->setGeometry(QRect(100, 520, 581, 196));
+        frame2->setMinimumSize(QSize(16, 196));
+        QPalette palette;
+        frame2->setPalette(palette);
+        frame2->setAutoFillBackground(false);
+        frame2->setFrameShape(QFrame::Shape::WinPanel);
+        frame2->setFrameShadow(QFrame::Shadow::Plain);
+        frame2->setLineWidth(1);
+        frame2->setMidLineWidth(0);
+        gridLayout = new QGridLayout(frame2);
+        gridLayout->setSpacing(3);
+        gridLayout->setContentsMargins(3, 3, 3, 3);
+        gridLayout->setObjectName("gridLayout");
+        frameBalayageY = new QFrame(frame2);
+        frameBalayageY->setObjectName("frameBalayageY");
+        QPalette palette1;
+        QBrush brush(QColor(255, 255, 255, 255));
+        brush.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Active, QPalette::Base, brush);
+        QBrush brush1(QColor(240, 236, 227, 255));
+        brush1.setStyle(Qt::SolidPattern);
+        palette1.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette1.setBrush(QPalette::Inactive, QPalette::Base, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette1.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette1.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        frameBalayageY->setPalette(palette1);
+        frameBalayageY->setAutoFillBackground(true);
+        frameBalayageY->setFrameShape(QFrame::Shape::WinPanel);
+        frameBalayageY->setFrameShadow(QFrame::Shadow::Plain);
+        frameBalayageY->setLineWidth(1);
+        _2 = new QGridLayout(frameBalayageY);
+#ifndef Q_OS_MAC
+        _2->setSpacing(6);
+#endif
+#ifndef Q_OS_MAC
+        _2->setContentsMargins(9, 9, 9, 9);
+#endif
+        _2->setObjectName("_2");
+        label_9 = new QLabel(frameBalayageY);
+        label_9->setObjectName("label_9");
+        QFont font;
+        font.setPointSize(14);
+        font.setBold(false);
+        font.setStrikeOut(false);
+        font.setKerning(false);
+        label_9->setFont(font);
+        label_9->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        horizontalLayout->addWidget(pushButtonConnexion);
+        _2->addWidget(label_9, 0, 0, 1, 1);
 
-        label = new QLabel(frame);
-        label->setObjectName("label");
-        label->setGeometry(QRect(10, 10, 791, 71));
-        label->setStyleSheet(QString::fromUtf8("color: rgb(170, 0, 0);\n"
+        lineEdit_1_4 = new QLineEdit(frameBalayageY);
+        lineEdit_1_4->setObjectName("lineEdit_1_4");
+        QFont font1;
+        font1.setPointSize(14);
+        font1.setBold(true);
+        font1.setStrikeOut(false);
+        font1.setKerning(false);
+        lineEdit_1_4->setFont(font1);
+
+        _2->addWidget(lineEdit_1_4, 1, 0, 1, 1);
+
+
+        gridLayout->addWidget(frameBalayageY, 1, 1, 1, 1);
+
+        framePositionY = new QFrame(frame2);
+        framePositionY->setObjectName("framePositionY");
+        QPalette palette2;
+        palette2.setBrush(QPalette::Active, QPalette::Base, brush);
+        palette2.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette2.setBrush(QPalette::Inactive, QPalette::Base, brush);
+        palette2.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette2.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette2.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        framePositionY->setPalette(palette2);
+        framePositionY->setAutoFillBackground(true);
+        framePositionY->setFrameShape(QFrame::Shape::WinPanel);
+        framePositionY->setFrameShadow(QFrame::Shadow::Plain);
+        framePositionY->setLineWidth(1);
+        _3 = new QGridLayout(framePositionY);
+#ifndef Q_OS_MAC
+        _3->setSpacing(6);
+#endif
+#ifndef Q_OS_MAC
+        _3->setContentsMargins(9, 9, 9, 9);
+#endif
+        _3->setObjectName("_3");
+        labelPositionY = new QLabel(framePositionY);
+        labelPositionY->setObjectName("labelPositionY");
+        labelPositionY->setFont(font);
+        labelPositionY->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _3->addWidget(labelPositionY, 0, 0, 1, 1);
+
+        lineEditPositionY = new QLineEdit(framePositionY);
+        lineEditPositionY->setObjectName("lineEditPositionY");
+        lineEditPositionY->setFont(font1);
+
+        _3->addWidget(lineEditPositionY, 1, 0, 1, 1);
+
+
+        gridLayout->addWidget(framePositionY, 0, 1, 1, 1);
+
+        frameBalayageX = new QFrame(frame2);
+        frameBalayageX->setObjectName("frameBalayageX");
+        QPalette palette3;
+        palette3.setBrush(QPalette::Active, QPalette::Base, brush);
+        palette3.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette3.setBrush(QPalette::Inactive, QPalette::Base, brush);
+        palette3.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette3.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette3.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        frameBalayageX->setPalette(palette3);
+        frameBalayageX->setAutoFillBackground(true);
+        frameBalayageX->setFrameShape(QFrame::Shape::WinPanel);
+        frameBalayageX->setFrameShadow(QFrame::Shadow::Plain);
+        frameBalayageX->setLineWidth(1);
+        _4 = new QGridLayout(frameBalayageX);
+#ifndef Q_OS_MAC
+        _4->setSpacing(6);
+#endif
+#ifndef Q_OS_MAC
+        _4->setContentsMargins(9, 9, 9, 9);
+#endif
+        _4->setObjectName("_4");
+        labelBalayageX = new QLabel(frameBalayageX);
+        labelBalayageX->setObjectName("labelBalayageX");
+        labelBalayageX->setFont(font);
+        labelBalayageX->setMouseTracking(false);
+        labelBalayageX->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _4->addWidget(labelBalayageX, 0, 0, 1, 1);
+
+        lineEditBalayageX = new QLineEdit(frameBalayageX);
+        lineEditBalayageX->setObjectName("lineEditBalayageX");
+        lineEditBalayageX->setFont(font1);
+
+        _4->addWidget(lineEditBalayageX, 1, 0, 1, 1);
+
+
+        gridLayout->addWidget(frameBalayageX, 1, 0, 1, 1);
+
+        framePositionX = new QFrame(frame2);
+        framePositionX->setObjectName("framePositionX");
+        QPalette palette4;
+        palette4.setBrush(QPalette::Active, QPalette::Base, brush);
+        palette4.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette4.setBrush(QPalette::Inactive, QPalette::Base, brush);
+        palette4.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette4.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette4.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        framePositionX->setPalette(palette4);
+        framePositionX->setAutoFillBackground(true);
+        framePositionX->setFrameShape(QFrame::Shape::WinPanel);
+        framePositionX->setFrameShadow(QFrame::Shadow::Plain);
+        framePositionX->setLineWidth(1);
+        _5 = new QGridLayout(framePositionX);
+#ifndef Q_OS_MAC
+        _5->setSpacing(6);
+#endif
+#ifndef Q_OS_MAC
+        _5->setContentsMargins(9, 9, 9, 9);
+#endif
+        _5->setObjectName("_5");
+        labelPositionX = new QLabel(framePositionX);
+        labelPositionX->setObjectName("labelPositionX");
+        labelPositionX->setFont(font);
+        labelPositionX->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _5->addWidget(labelPositionX, 0, 0, 1, 1);
+
+        lineEditPositionX = new QLineEdit(framePositionX);
+        lineEditPositionX->setObjectName("lineEditPositionX");
+        lineEditPositionX->setFont(font1);
+
+        _5->addWidget(lineEditPositionX, 1, 0, 1, 1);
+
+
+        gridLayout->addWidget(framePositionX, 0, 0, 1, 1);
+
+        verticalLayoutWidget = new QWidget(centralwidget);
+        verticalLayoutWidget->setObjectName("verticalLayoutWidget");
+        verticalLayoutWidget->setGeometry(QRect(0, 0, 821, 94));
+        Header = new QVBoxLayout(verticalLayoutWidget);
+        Header->setObjectName("Header");
+        Header->setContentsMargins(0, 0, 0, 0);
+        label_1 = new QLabel(verticalLayoutWidget);
+        label_1->setObjectName("label_1");
+        label_1->setStyleSheet(QString::fromUtf8("color: rgb(170, 0, 0);\n"
 "border-color: rgb(0, 0, 255);"));
+
+        Header->addWidget(label_1);
+
+        pushButtonConnexion = new QPushButton(verticalLayoutWidget);
+        pushButtonConnexion->setObjectName("pushButtonConnexion");
+        pushButtonConnexion->setStyleSheet(QString::fromUtf8("font: 15pt \"Segoe UI\";"));
+
+        Header->addWidget(pushButtonConnexion);
+
+        frame1 = new QFrame(centralwidget);
+        frame1->setObjectName("frame1");
+        frame1->setGeometry(QRect(200, 120, 391, 371));
+        frame1->setMinimumSize(QSize(16, 196));
+        QPalette palette5;
+        frame1->setPalette(palette5);
+        frame1->setAutoFillBackground(false);
+        frame1->setStyleSheet(QString::fromUtf8("\n"
+"border-color: rgb(0, 0, 255);"));
+        frame1->setFrameShape(QFrame::Shape::WinPanel);
+        frame1->setFrameShadow(QFrame::Shadow::Plain);
+        frame1->setLineWidth(1);
+        frame1->setMidLineWidth(0);
+        verticalLayout_2 = new QVBoxLayout(frame1);
+        verticalLayout_2->setSpacing(3);
+        verticalLayout_2->setObjectName("verticalLayout_2");
+        frameEnergie = new QFrame(frame1);
+        frameEnergie->setObjectName("frameEnergie");
+        QPalette palette6;
+        palette6.setBrush(QPalette::Active, QPalette::Base, brush);
+        palette6.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette6.setBrush(QPalette::Inactive, QPalette::Base, brush);
+        palette6.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette6.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette6.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        frameEnergie->setPalette(palette6);
+        frameEnergie->setAutoFillBackground(true);
+        frameEnergie->setFrameShape(QFrame::Shape::WinPanel);
+        frameEnergie->setFrameShadow(QFrame::Shadow::Plain);
+        frameEnergie->setLineWidth(1);
+        _10 = new QGridLayout(frameEnergie);
+#ifndef Q_OS_MAC
+        _10->setSpacing(6);
+#endif
+#ifndef Q_OS_MAC
+        _10->setContentsMargins(9, 9, 9, 9);
+#endif
+        _10->setObjectName("_10");
+        labelEnergie = new QLabel(frameEnergie);
+        labelEnergie->setObjectName("labelEnergie");
+        labelEnergie->setFont(font);
+        labelEnergie->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _10->addWidget(labelEnergie, 0, 0, 1, 1);
+
+        lineEditEnergie = new QLineEdit(frameEnergie);
+        lineEditEnergie->setObjectName("lineEditEnergie");
+        lineEditEnergie->setFont(font1);
+
+        _10->addWidget(lineEditEnergie, 1, 0, 1, 1);
+
+
+        verticalLayout_2->addWidget(frameEnergie);
+
+        frameCourantEmission = new QFrame(frame1);
+        frameCourantEmission->setObjectName("frameCourantEmission");
+        QPalette palette7;
+        palette7.setBrush(QPalette::Active, QPalette::Base, brush);
+        palette7.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette7.setBrush(QPalette::Inactive, QPalette::Base, brush);
+        palette7.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette7.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette7.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        frameCourantEmission->setPalette(palette7);
+        frameCourantEmission->setAutoFillBackground(true);
+        frameCourantEmission->setFrameShape(QFrame::Shape::WinPanel);
+        frameCourantEmission->setFrameShadow(QFrame::Shadow::Plain);
+        frameCourantEmission->setLineWidth(1);
+        _8 = new QGridLayout(frameCourantEmission);
+        _8->setSpacing(6);
+        _8->setObjectName("_8");
+        labelCourantEmission = new QLabel(frameCourantEmission);
+        labelCourantEmission->setObjectName("labelCourantEmission");
+        labelCourantEmission->setFont(font);
+        labelCourantEmission->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _8->addWidget(labelCourantEmission, 0, 0, 1, 1);
+
+        lineEditCourantEmission = new QLineEdit(frameCourantEmission);
+        lineEditCourantEmission->setObjectName("lineEditCourantEmission");
+        lineEditCourantEmission->setFont(font1);
+
+        _8->addWidget(lineEditCourantEmission, 1, 0, 1, 1);
+
+
+        verticalLayout_2->addWidget(frameCourantEmission);
+
+        frameFocus = new QFrame(frame1);
+        frameFocus->setObjectName("frameFocus");
+        QPalette palette8;
+        palette8.setBrush(QPalette::Active, QPalette::Base, brush);
+        palette8.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette8.setBrush(QPalette::Inactive, QPalette::Base, brush);
+        palette8.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette8.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette8.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        frameFocus->setPalette(palette8);
+        frameFocus->setAutoFillBackground(true);
+        frameFocus->setFrameShape(QFrame::Shape::WinPanel);
+        frameFocus->setFrameShadow(QFrame::Shadow::Plain);
+        frameFocus->setLineWidth(1);
+        _9 = new QGridLayout(frameFocus);
+#ifndef Q_OS_MAC
+        _9->setSpacing(6);
+#endif
+#ifndef Q_OS_MAC
+        _9->setContentsMargins(9, 9, 9, 9);
+#endif
+        _9->setObjectName("_9");
+        labelFocus = new QLabel(frameFocus);
+        labelFocus->setObjectName("labelFocus");
+        labelFocus->setFont(font);
+        labelFocus->setMouseTracking(false);
+        labelFocus->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _9->addWidget(labelFocus, 0, 0, 1, 1);
+
+        lineEditFocus = new QLineEdit(frameFocus);
+        lineEditFocus->setObjectName("lineEditFocus");
+        lineEditFocus->setFont(font1);
+
+        _9->addWidget(lineEditFocus, 1, 0, 1, 1);
+
+
+        verticalLayout_2->addWidget(frameFocus);
+
+        frameWehnelt = new QFrame(frame1);
+        frameWehnelt->setObjectName("frameWehnelt");
+        QPalette palette9;
+        palette9.setBrush(QPalette::Active, QPalette::Base, brush);
+        palette9.setBrush(QPalette::Active, QPalette::Window, brush1);
+        palette9.setBrush(QPalette::Inactive, QPalette::Base, brush);
+        palette9.setBrush(QPalette::Inactive, QPalette::Window, brush1);
+        palette9.setBrush(QPalette::Disabled, QPalette::Base, brush1);
+        palette9.setBrush(QPalette::Disabled, QPalette::Window, brush1);
+        frameWehnelt->setPalette(palette9);
+        frameWehnelt->setAutoFillBackground(true);
+        frameWehnelt->setFrameShape(QFrame::Shape::WinPanel);
+        frameWehnelt->setFrameShadow(QFrame::Shadow::Plain);
+        frameWehnelt->setLineWidth(1);
+        _7 = new QGridLayout(frameWehnelt);
+        _7->setSpacing(6);
+        _7->setObjectName("_7");
+        lineEdiWehnelt = new QLineEdit(frameWehnelt);
+        lineEdiWehnelt->setObjectName("lineEdiWehnelt");
+        lineEdiWehnelt->setFont(font1);
+
+        _7->addWidget(lineEdiWehnelt, 2, 0, 1, 1);
+
+        labelWehnelt = new QLabel(frameWehnelt);
+        labelWehnelt->setObjectName("labelWehnelt");
+        labelWehnelt->setFont(font);
+        labelWehnelt->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _7->addWidget(labelWehnelt, 1, 0, 1, 1);
+
+
+        verticalLayout_2->addWidget(frameWehnelt);
+
+        ValidatePushButton = new QPushButton(centralwidget);
+        ValidatePushButton->setObjectName("ValidatePushButton");
+        ValidatePushButton->setGeometry(QRect(0, 740, 831, 51));
+        ValidatePushButton->setStyleSheet(QString::fromUtf8("font: 15pt \"Segoe UI\";"));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 822, 26));
+        menubar->setGeometry(QRect(0, 0, 832, 26));
         MainWindow->setMenuBar(menubar);
-        statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName("statusbar");
-        MainWindow->setStatusBar(statusbar);
         toolBar = new QToolBar(MainWindow);
         toolBar->setObjectName("toolBar");
         MainWindow->addToolBar(Qt::ToolBarArea::RightToolBarArea, toolBar);
+        statusbar = new QStatusBar(MainWindow);
+        statusbar->setObjectName("statusbar");
+        MainWindow->setStatusBar(statusbar);
 
         retranslateUi(MainWindow);
 
@@ -85,8 +465,17 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        label_9->setText(QCoreApplication::translate("MainWindow", "Balayage Y ( V / \302\260 )", nullptr));
+        labelPositionY->setText(QCoreApplication::translate("MainWindow", "Position Y ( mm )", nullptr));
+        labelBalayageX->setText(QCoreApplication::translate("MainWindow", "Balayage X ( V / \302\260 )", nullptr));
+        labelPositionX->setText(QCoreApplication::translate("MainWindow", "Position X ( mm )", nullptr));
+        label_1->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">CONFIGURATION</span></p></body></html>", nullptr));
         pushButtonConnexion->setText(QCoreApplication::translate("MainWindow", "Connexion", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">CONFIGURATION</span></p></body></html>", nullptr));
+        labelEnergie->setText(QCoreApplication::translate("MainWindow", "Energie ( eV )", nullptr));
+        labelCourantEmission->setText(QCoreApplication::translate("MainWindow", "Courant d'\303\251mission ( mA )", nullptr));
+        labelFocus->setText(QCoreApplication::translate("MainWindow", "Focus ( % )", nullptr));
+        labelWehnelt->setText(QCoreApplication::translate("MainWindow", "Wehnelt ( 1 / 10 V )", nullptr));
+        ValidatePushButton->setText(QCoreApplication::translate("MainWindow", "Valider", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi
 

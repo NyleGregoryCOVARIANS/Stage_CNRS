@@ -2,6 +2,8 @@
 #include "Fenetres/Connexion/fenetreconnexion.h" // Inclure la bonne classe
 #include "ui_mainwindow.h"
 
+#include <QDebug>
+
 // Constructeur
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,9 +16,14 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     connect(m_ui->pushButtonConnexion, &QPushButton::clicked, this, &MainWindow::connexion_button_clicked); // Si le bouton connexion est cliqué, alors lance la fonction connexion_button_clicked() qui affiche la fenêtre de connexion
-
+    connect(m_ui->ValidatePushButton, &QPushButton::clicked, this, &MainWindow::validate_button_clicked);
     this->show();
 }
+
+void MainWindow::validate_button_clicked(){
+    qDebug() << "BOUTON CLIQUE";
+}
+
 
 
 // Affiche la fenetre de connexion

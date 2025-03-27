@@ -15,10 +15,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void validate_button_clicked();
 
 private slots:
     void connexion_button_clicked();
+    void validate_button_clicked();
+
 
 private:
     Ui::MainWindow *m_ui; //this
