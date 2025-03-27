@@ -19,6 +19,7 @@ public:
 private slots:
     void connexion_button_clicked();
     void validate_button_clicked();
+    void transmissionResultat();
 
 
 private:

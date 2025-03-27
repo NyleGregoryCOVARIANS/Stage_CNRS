@@ -18,12 +18,10 @@ public:
     FenetreConnexion(QWidget *parent = nullptr, Communication *communication = nullptr);
     ~FenetreConnexion();
 
+signals:
+    void transmissionResultat(const QString &CurrentEni, QString &CurrentFocus);
+
 private slots:
-    /*
-    Brief :
-            - Lit et sauvegarde les parametres com et baudRate de la fenetre
-            - Cache la fenêtre dialogue de connexion
-*/
     void on_pushButton_rs232_clicked();
 
 private:
