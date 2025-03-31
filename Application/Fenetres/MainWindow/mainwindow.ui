@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>832</width>
-    <height>841</height>
+    <width>850</width>
+    <height>830</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QFrame" name="frame2">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>520</y>
-      <width>581</width>
-      <height>196</height>
+      <x>10</x>
+      <y>490</y>
+      <width>821</width>
+      <height>241</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -137,12 +137,21 @@
         <number>1</number>
        </property>
        <layout class="QGridLayout" name="_2">
-        <property name="margin" stdset="0">
-         <number>9</number>
-        </property>
         <property name="spacing">
          <number>6</number>
         </property>
+        <item row="1" column="0">
+         <widget class="QLineEdit" name="lineEditBalayageY">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <bold>true</bold>
+            <strikeout>false</strikeout>
+            <kerning>false</kerning>
+           </font>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label_9">
           <property name="font">
@@ -154,22 +163,38 @@
            </font>
           </property>
           <property name="text">
-           <string>Balayage Y ( V / ° )</string>
+           <string>Balayage Y ( mm )</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignmentFlag::AlignCenter</set>
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLineEdit" name="lineEdit_1_4">
+        <item row="0" column="1">
+         <widget class="QLabel" name="valeurMesurer_8">
           <property name="font">
            <font>
             <pointsize>14</pointsize>
-            <bold>true</bold>
+            <bold>false</bold>
             <strikeout>false</strikeout>
             <kerning>false</kerning>
            </font>
+          </property>
+          <property name="text">
+           <string>Valeur mesurée</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="valeurMesurerBalayageY">
+          <property name="styleSheet">
+           <string notr="true">font: 20pt &quot;Segoe UI&quot;;</string>
+          </property>
+          <property name="text">
+           <string>0</string>
           </property>
          </widget>
         </item>
@@ -255,12 +280,21 @@
         <number>1</number>
        </property>
        <layout class="QGridLayout" name="_3">
-        <property name="margin" stdset="0">
-         <number>9</number>
-        </property>
         <property name="spacing">
          <number>6</number>
         </property>
+        <item row="1" column="0">
+         <widget class="QLineEdit" name="lineEditPositionY">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <bold>true</bold>
+            <strikeout>false</strikeout>
+            <kerning>false</kerning>
+           </font>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="labelPositionY">
           <property name="font">
@@ -279,15 +313,31 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLineEdit" name="lineEditPositionY">
+        <item row="0" column="1">
+         <widget class="QLabel" name="valeurMesurer_6">
           <property name="font">
            <font>
             <pointsize>14</pointsize>
-            <bold>true</bold>
+            <bold>false</bold>
             <strikeout>false</strikeout>
             <kerning>false</kerning>
            </font>
+          </property>
+          <property name="text">
+           <string>Valeur mesurée</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="valeurMesurerPositionY">
+          <property name="styleSheet">
+           <string notr="true">font: 20pt &quot;Segoe UI&quot;;</string>
+          </property>
+          <property name="text">
+           <string>0</string>
           </property>
          </widget>
         </item>
@@ -373,12 +423,21 @@
         <number>1</number>
        </property>
        <layout class="QGridLayout" name="_4">
-        <property name="margin" stdset="0">
-         <number>9</number>
-        </property>
         <property name="spacing">
          <number>6</number>
         </property>
+        <item row="1" column="0">
+         <widget class="QLineEdit" name="lineEditBalayageX">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <bold>true</bold>
+            <strikeout>false</strikeout>
+            <kerning>false</kerning>
+           </font>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="labelBalayageX">
           <property name="font">
@@ -393,22 +452,38 @@
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>Balayage X ( V / ° )</string>
+           <string>Balayage X ( mm )</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignmentFlag::AlignCenter</set>
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLineEdit" name="lineEditBalayageX">
+        <item row="0" column="1">
+         <widget class="QLabel" name="valeurMesurer_7">
           <property name="font">
            <font>
             <pointsize>14</pointsize>
-            <bold>true</bold>
+            <bold>false</bold>
             <strikeout>false</strikeout>
             <kerning>false</kerning>
            </font>
+          </property>
+          <property name="text">
+           <string>Valeur mesurée</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="valeurMesurerBalayageX">
+          <property name="styleSheet">
+           <string notr="true">font: 20pt &quot;Segoe UI&quot;;</string>
+          </property>
+          <property name="text">
+           <string>0</string>
           </property>
          </widget>
         </item>
@@ -494,9 +569,6 @@
         <number>1</number>
        </property>
        <layout class="QGridLayout" name="_5">
-        <property name="margin" stdset="0">
-         <number>9</number>
-        </property>
         <property name="spacing">
          <number>6</number>
         </property>
@@ -530,6 +602,34 @@
           </property>
          </widget>
         </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="valeurMesurer_5">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <bold>false</bold>
+            <strikeout>false</strikeout>
+            <kerning>false</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Valeur mesurée</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="valeurMesurerPositionX">
+          <property name="styleSheet">
+           <string notr="true">font: 20pt &quot;Segoe UI&quot;;</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>
@@ -541,7 +641,7 @@
       <x>0</x>
       <y>0</y>
       <width>821</width>
-      <height>94</height>
+      <height>87</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="Header">
@@ -571,10 +671,10 @@ border-color: rgb(0, 0, 255);</string>
    <widget class="QFrame" name="frame1">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>120</y>
-      <width>391</width>
-      <height>371</height>
+      <x>80</x>
+      <y>90</y>
+      <width>691</width>
+      <height>391</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -692,9 +792,6 @@ border-color: rgb(0, 0, 255);</string>
         <number>1</number>
        </property>
        <layout class="QGridLayout" name="_10">
-        <property name="margin" stdset="0">
-         <number>9</number>
-        </property>
         <property name="spacing">
          <number>6</number>
         </property>
@@ -725,6 +822,34 @@ border-color: rgb(0, 0, 255);</string>
             <strikeout>false</strikeout>
             <kerning>false</kerning>
            </font>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="valeurMesurer">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <bold>false</bold>
+            <strikeout>false</strikeout>
+            <kerning>false</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Valeur mesurée</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="valeurMesurerEnergie">
+          <property name="styleSheet">
+           <string notr="true">font: 20pt &quot;Segoe UI&quot;;</string>
+          </property>
+          <property name="text">
+           <string>0</string>
           </property>
          </widget>
         </item>
@@ -813,6 +938,18 @@ border-color: rgb(0, 0, 255);</string>
         <property name="spacing">
          <number>6</number>
         </property>
+        <item row="1" column="0">
+         <widget class="QLineEdit" name="lineEditCourantEmission">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <bold>true</bold>
+            <strikeout>false</strikeout>
+            <kerning>false</kerning>
+           </font>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="labelCourantEmission">
           <property name="font">
@@ -831,15 +968,31 @@ border-color: rgb(0, 0, 255);</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLineEdit" name="lineEditCourantEmission">
+        <item row="1" column="1">
+         <widget class="QLabel" name="valeurMesurerCourantEmission">
+          <property name="styleSheet">
+           <string notr="true">font: 20pt &quot;Segoe UI&quot;;</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="valeurMesurer_3">
           <property name="font">
            <font>
             <pointsize>14</pointsize>
-            <bold>true</bold>
+            <bold>false</bold>
             <strikeout>false</strikeout>
             <kerning>false</kerning>
            </font>
+          </property>
+          <property name="text">
+           <string>Valeur mesurée</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
           </property>
          </widget>
         </item>
@@ -925,12 +1078,21 @@ border-color: rgb(0, 0, 255);</string>
         <number>1</number>
        </property>
        <layout class="QGridLayout" name="_9">
-        <property name="margin" stdset="0">
-         <number>9</number>
-        </property>
         <property name="spacing">
          <number>6</number>
         </property>
+        <item row="1" column="0">
+         <widget class="QLineEdit" name="lineEditFocus">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <bold>true</bold>
+            <strikeout>false</strikeout>
+            <kerning>false</kerning>
+           </font>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="labelFocus">
           <property name="font">
@@ -952,15 +1114,31 @@ border-color: rgb(0, 0, 255);</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLineEdit" name="lineEditFocus">
+        <item row="0" column="1">
+         <widget class="QLabel" name="valeurMesurer_2">
           <property name="font">
            <font>
             <pointsize>14</pointsize>
-            <bold>true</bold>
+            <bold>false</bold>
             <strikeout>false</strikeout>
             <kerning>false</kerning>
            </font>
+          </property>
+          <property name="text">
+           <string>Valeur mesurée</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="valeurMesurerFocus">
+          <property name="styleSheet">
+           <string notr="true">font: 20pt &quot;Segoe UI&quot;;</string>
+          </property>
+          <property name="text">
+           <string>0</string>
           </property>
          </widget>
         </item>
@@ -1049,18 +1227,6 @@ border-color: rgb(0, 0, 255);</string>
         <property name="spacing">
          <number>6</number>
         </property>
-        <item row="2" column="0">
-         <widget class="QLineEdit" name="lineEdiWehnelt">
-          <property name="font">
-           <font>
-            <pointsize>14</pointsize>
-            <bold>true</bold>
-            <strikeout>false</strikeout>
-            <kerning>false</kerning>
-           </font>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0">
          <widget class="QLabel" name="labelWehnelt">
           <property name="font">
@@ -1079,6 +1245,46 @@ border-color: rgb(0, 0, 255);</string>
           </property>
          </widget>
         </item>
+        <item row="2" column="0">
+         <widget class="QLineEdit" name="lineEditWehnelt">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <bold>true</bold>
+            <strikeout>false</strikeout>
+            <kerning>false</kerning>
+           </font>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="valeurMesurer_4">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <bold>false</bold>
+            <strikeout>false</strikeout>
+            <kerning>false</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Valeur mesurée</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="valeurMesurerWehnelt">
+          <property name="styleSheet">
+           <string notr="true">font: 20pt &quot;Segoe UI&quot;;</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </item>
@@ -1087,10 +1293,10 @@ border-color: rgb(0, 0, 255);</string>
    <widget class="QPushButton" name="ValidatePushButton">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>-10</x>
       <y>740</y>
       <width>831</width>
-      <height>51</height>
+      <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -1106,7 +1312,7 @@ border-color: rgb(0, 0, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>832</width>
+     <width>850</width>
      <height>26</height>
     </rect>
    </property>

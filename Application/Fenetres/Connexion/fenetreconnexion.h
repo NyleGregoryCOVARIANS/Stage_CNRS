@@ -19,7 +19,8 @@ public:
     ~FenetreConnexion();
 
 signals:
-    void transmissionResultat(const QString &CurrentEni, QString &CurrentFocus);
+    void transmissionResultatPret( QString &CurrentEnergie, QString &CurrentCourantEmission, QString &CurrentFocus, QString &CurrentWehnelt,
+        QString &CurrentPosX, QString &CurrentPosY, QString &CurrentBalX, QString &CurrentBalY);
 
 private slots:
     void on_pushButton_rs232_clicked();

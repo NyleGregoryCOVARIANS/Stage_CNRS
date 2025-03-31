@@ -1,5 +1,6 @@
 #include <QSerialPort>
 #include "communication.h"
+#include <QRegularExpression> // Isoler uniquement la valeur numérique présente dans la réponse
 
 Communication::Communication()
 {
@@ -63,16 +64,29 @@ bool Communication::envoyer(QString commande)
 }
 
 
+#include <QRegularExpression>
+
 QString Communication::recevoir()
 {
     QByteArray reponseBrute;
     while (m_port->waitForReadyRead(100)) {
         reponseBrute += m_port->readAll();
     }
-    QString reponseString = QString(reponseBrute);
+    QString reponseString = QString(reponseBrute).trimmed(); // Nettoie la chaîne
 
-    return reponseString;
+    // Expression régulière pour extraire tous les nombres
+    QRegularExpression regex(R"(-?\d+)");
+    QRegularExpressionMatchIterator it = regex.globalMatch(reponseString);
+
+    QString dernierNombre;
+    while (it.hasNext()) {
+        QRegularExpressionMatch match = it.next();
+        dernierNombre = match.captured(0);  // Garde le dernier nombre trouvé
+    }
+
+    return dernierNombre.isEmpty() ? "" : dernierNombre;
 }
+
 
 QString Communication::recevoirKeithley6485()
 {

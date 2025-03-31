@@ -33,20 +33,28 @@ public:
     QGridLayout *gridLayout;
     QFrame *frameBalayageY;
     QGridLayout *_2;
+    QLineEdit *lineEditBalayageY;
     QLabel *label_9;
-    QLineEdit *lineEdit_1_4;
+    QLabel *valeurMesurer_8;
+    QLabel *valeurMesurerBalayageY;
     QFrame *framePositionY;
     QGridLayout *_3;
-    QLabel *labelPositionY;
     QLineEdit *lineEditPositionY;
+    QLabel *labelPositionY;
+    QLabel *valeurMesurer_6;
+    QLabel *valeurMesurerPositionY;
     QFrame *frameBalayageX;
     QGridLayout *_4;
-    QLabel *labelBalayageX;
     QLineEdit *lineEditBalayageX;
+    QLabel *labelBalayageX;
+    QLabel *valeurMesurer_7;
+    QLabel *valeurMesurerBalayageX;
     QFrame *framePositionX;
     QGridLayout *_5;
     QLabel *labelPositionX;
     QLineEdit *lineEditPositionX;
+    QLabel *valeurMesurer_5;
+    QLabel *valeurMesurerPositionX;
     QWidget *verticalLayoutWidget;
     QVBoxLayout *Header;
     QLabel *label_1;
@@ -57,18 +65,26 @@ public:
     QGridLayout *_10;
     QLabel *labelEnergie;
     QLineEdit *lineEditEnergie;
+    QLabel *valeurMesurer;
+    QLabel *valeurMesurerEnergie;
     QFrame *frameCourantEmission;
     QGridLayout *_8;
-    QLabel *labelCourantEmission;
     QLineEdit *lineEditCourantEmission;
+    QLabel *labelCourantEmission;
+    QLabel *valeurMesurerCourantEmission;
+    QLabel *valeurMesurer_3;
     QFrame *frameFocus;
     QGridLayout *_9;
-    QLabel *labelFocus;
     QLineEdit *lineEditFocus;
+    QLabel *labelFocus;
+    QLabel *valeurMesurer_2;
+    QLabel *valeurMesurerFocus;
     QFrame *frameWehnelt;
     QGridLayout *_7;
-    QLineEdit *lineEdiWehnelt;
     QLabel *labelWehnelt;
+    QLineEdit *lineEditWehnelt;
+    QLabel *valeurMesurer_4;
+    QLabel *valeurMesurerWehnelt;
     QPushButton *ValidatePushButton;
     QMenuBar *menubar;
     QToolBar *toolBar;
@@ -78,12 +94,12 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(832, 841);
+        MainWindow->resize(850, 830);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         frame2 = new QFrame(centralwidget);
         frame2->setObjectName("frame2");
-        frame2->setGeometry(QRect(100, 520, 581, 196));
+        frame2->setGeometry(QRect(10, 490, 821, 241));
         frame2->setMinimumSize(QSize(16, 196));
         QPalette palette;
         frame2->setPalette(palette);
@@ -115,35 +131,43 @@ public:
         frameBalayageY->setFrameShadow(QFrame::Shadow::Plain);
         frameBalayageY->setLineWidth(1);
         _2 = new QGridLayout(frameBalayageY);
-#ifndef Q_OS_MAC
         _2->setSpacing(6);
-#endif
-#ifndef Q_OS_MAC
-        _2->setContentsMargins(9, 9, 9, 9);
-#endif
         _2->setObjectName("_2");
-        label_9 = new QLabel(frameBalayageY);
-        label_9->setObjectName("label_9");
+        lineEditBalayageY = new QLineEdit(frameBalayageY);
+        lineEditBalayageY->setObjectName("lineEditBalayageY");
         QFont font;
         font.setPointSize(14);
-        font.setBold(false);
+        font.setBold(true);
         font.setStrikeOut(false);
         font.setKerning(false);
-        label_9->setFont(font);
+        lineEditBalayageY->setFont(font);
+
+        _2->addWidget(lineEditBalayageY, 1, 0, 1, 1);
+
+        label_9 = new QLabel(frameBalayageY);
+        label_9->setObjectName("label_9");
+        QFont font1;
+        font1.setPointSize(14);
+        font1.setBold(false);
+        font1.setStrikeOut(false);
+        font1.setKerning(false);
+        label_9->setFont(font1);
         label_9->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         _2->addWidget(label_9, 0, 0, 1, 1);
 
-        lineEdit_1_4 = new QLineEdit(frameBalayageY);
-        lineEdit_1_4->setObjectName("lineEdit_1_4");
-        QFont font1;
-        font1.setPointSize(14);
-        font1.setBold(true);
-        font1.setStrikeOut(false);
-        font1.setKerning(false);
-        lineEdit_1_4->setFont(font1);
+        valeurMesurer_8 = new QLabel(frameBalayageY);
+        valeurMesurer_8->setObjectName("valeurMesurer_8");
+        valeurMesurer_8->setFont(font1);
+        valeurMesurer_8->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        _2->addWidget(lineEdit_1_4, 1, 0, 1, 1);
+        _2->addWidget(valeurMesurer_8, 0, 1, 1, 1);
+
+        valeurMesurerBalayageY = new QLabel(frameBalayageY);
+        valeurMesurerBalayageY->setObjectName("valeurMesurerBalayageY");
+        valeurMesurerBalayageY->setStyleSheet(QString::fromUtf8("font: 20pt \"Segoe UI\";"));
+
+        _2->addWidget(valeurMesurerBalayageY, 1, 1, 1, 1);
 
 
         gridLayout->addWidget(frameBalayageY, 1, 1, 1, 1);
@@ -163,25 +187,33 @@ public:
         framePositionY->setFrameShadow(QFrame::Shadow::Plain);
         framePositionY->setLineWidth(1);
         _3 = new QGridLayout(framePositionY);
-#ifndef Q_OS_MAC
         _3->setSpacing(6);
-#endif
-#ifndef Q_OS_MAC
-        _3->setContentsMargins(9, 9, 9, 9);
-#endif
         _3->setObjectName("_3");
+        lineEditPositionY = new QLineEdit(framePositionY);
+        lineEditPositionY->setObjectName("lineEditPositionY");
+        lineEditPositionY->setFont(font);
+
+        _3->addWidget(lineEditPositionY, 1, 0, 1, 1);
+
         labelPositionY = new QLabel(framePositionY);
         labelPositionY->setObjectName("labelPositionY");
-        labelPositionY->setFont(font);
+        labelPositionY->setFont(font1);
         labelPositionY->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         _3->addWidget(labelPositionY, 0, 0, 1, 1);
 
-        lineEditPositionY = new QLineEdit(framePositionY);
-        lineEditPositionY->setObjectName("lineEditPositionY");
-        lineEditPositionY->setFont(font1);
+        valeurMesurer_6 = new QLabel(framePositionY);
+        valeurMesurer_6->setObjectName("valeurMesurer_6");
+        valeurMesurer_6->setFont(font1);
+        valeurMesurer_6->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        _3->addWidget(lineEditPositionY, 1, 0, 1, 1);
+        _3->addWidget(valeurMesurer_6, 0, 1, 1, 1);
+
+        valeurMesurerPositionY = new QLabel(framePositionY);
+        valeurMesurerPositionY->setObjectName("valeurMesurerPositionY");
+        valeurMesurerPositionY->setStyleSheet(QString::fromUtf8("font: 20pt \"Segoe UI\";"));
+
+        _3->addWidget(valeurMesurerPositionY, 1, 1, 1, 1);
 
 
         gridLayout->addWidget(framePositionY, 0, 1, 1, 1);
@@ -201,26 +233,34 @@ public:
         frameBalayageX->setFrameShadow(QFrame::Shadow::Plain);
         frameBalayageX->setLineWidth(1);
         _4 = new QGridLayout(frameBalayageX);
-#ifndef Q_OS_MAC
         _4->setSpacing(6);
-#endif
-#ifndef Q_OS_MAC
-        _4->setContentsMargins(9, 9, 9, 9);
-#endif
         _4->setObjectName("_4");
+        lineEditBalayageX = new QLineEdit(frameBalayageX);
+        lineEditBalayageX->setObjectName("lineEditBalayageX");
+        lineEditBalayageX->setFont(font);
+
+        _4->addWidget(lineEditBalayageX, 1, 0, 1, 1);
+
         labelBalayageX = new QLabel(frameBalayageX);
         labelBalayageX->setObjectName("labelBalayageX");
-        labelBalayageX->setFont(font);
+        labelBalayageX->setFont(font1);
         labelBalayageX->setMouseTracking(false);
         labelBalayageX->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         _4->addWidget(labelBalayageX, 0, 0, 1, 1);
 
-        lineEditBalayageX = new QLineEdit(frameBalayageX);
-        lineEditBalayageX->setObjectName("lineEditBalayageX");
-        lineEditBalayageX->setFont(font1);
+        valeurMesurer_7 = new QLabel(frameBalayageX);
+        valeurMesurer_7->setObjectName("valeurMesurer_7");
+        valeurMesurer_7->setFont(font1);
+        valeurMesurer_7->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        _4->addWidget(lineEditBalayageX, 1, 0, 1, 1);
+        _4->addWidget(valeurMesurer_7, 0, 1, 1, 1);
+
+        valeurMesurerBalayageX = new QLabel(frameBalayageX);
+        valeurMesurerBalayageX->setObjectName("valeurMesurerBalayageX");
+        valeurMesurerBalayageX->setStyleSheet(QString::fromUtf8("font: 20pt \"Segoe UI\";"));
+
+        _4->addWidget(valeurMesurerBalayageX, 1, 1, 1, 1);
 
 
         gridLayout->addWidget(frameBalayageX, 1, 0, 1, 1);
@@ -240,32 +280,40 @@ public:
         framePositionX->setFrameShadow(QFrame::Shadow::Plain);
         framePositionX->setLineWidth(1);
         _5 = new QGridLayout(framePositionX);
-#ifndef Q_OS_MAC
         _5->setSpacing(6);
-#endif
-#ifndef Q_OS_MAC
-        _5->setContentsMargins(9, 9, 9, 9);
-#endif
         _5->setObjectName("_5");
         labelPositionX = new QLabel(framePositionX);
         labelPositionX->setObjectName("labelPositionX");
-        labelPositionX->setFont(font);
+        labelPositionX->setFont(font1);
         labelPositionX->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         _5->addWidget(labelPositionX, 0, 0, 1, 1);
 
         lineEditPositionX = new QLineEdit(framePositionX);
         lineEditPositionX->setObjectName("lineEditPositionX");
-        lineEditPositionX->setFont(font1);
+        lineEditPositionX->setFont(font);
 
         _5->addWidget(lineEditPositionX, 1, 0, 1, 1);
+
+        valeurMesurer_5 = new QLabel(framePositionX);
+        valeurMesurer_5->setObjectName("valeurMesurer_5");
+        valeurMesurer_5->setFont(font1);
+        valeurMesurer_5->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _5->addWidget(valeurMesurer_5, 0, 1, 1, 1);
+
+        valeurMesurerPositionX = new QLabel(framePositionX);
+        valeurMesurerPositionX->setObjectName("valeurMesurerPositionX");
+        valeurMesurerPositionX->setStyleSheet(QString::fromUtf8("font: 20pt \"Segoe UI\";"));
+
+        _5->addWidget(valeurMesurerPositionX, 1, 1, 1, 1);
 
 
         gridLayout->addWidget(framePositionX, 0, 0, 1, 1);
 
         verticalLayoutWidget = new QWidget(centralwidget);
         verticalLayoutWidget->setObjectName("verticalLayoutWidget");
-        verticalLayoutWidget->setGeometry(QRect(0, 0, 821, 94));
+        verticalLayoutWidget->setGeometry(QRect(0, 0, 821, 87));
         Header = new QVBoxLayout(verticalLayoutWidget);
         Header->setObjectName("Header");
         Header->setContentsMargins(0, 0, 0, 0);
@@ -284,7 +332,7 @@ public:
 
         frame1 = new QFrame(centralwidget);
         frame1->setObjectName("frame1");
-        frame1->setGeometry(QRect(200, 120, 391, 371));
+        frame1->setGeometry(QRect(80, 90, 691, 391));
         frame1->setMinimumSize(QSize(16, 196));
         QPalette palette5;
         frame1->setPalette(palette5);
@@ -313,25 +361,33 @@ public:
         frameEnergie->setFrameShadow(QFrame::Shadow::Plain);
         frameEnergie->setLineWidth(1);
         _10 = new QGridLayout(frameEnergie);
-#ifndef Q_OS_MAC
         _10->setSpacing(6);
-#endif
-#ifndef Q_OS_MAC
-        _10->setContentsMargins(9, 9, 9, 9);
-#endif
         _10->setObjectName("_10");
         labelEnergie = new QLabel(frameEnergie);
         labelEnergie->setObjectName("labelEnergie");
-        labelEnergie->setFont(font);
+        labelEnergie->setFont(font1);
         labelEnergie->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         _10->addWidget(labelEnergie, 0, 0, 1, 1);
 
         lineEditEnergie = new QLineEdit(frameEnergie);
         lineEditEnergie->setObjectName("lineEditEnergie");
-        lineEditEnergie->setFont(font1);
+        lineEditEnergie->setFont(font);
 
         _10->addWidget(lineEditEnergie, 1, 0, 1, 1);
+
+        valeurMesurer = new QLabel(frameEnergie);
+        valeurMesurer->setObjectName("valeurMesurer");
+        valeurMesurer->setFont(font1);
+        valeurMesurer->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _10->addWidget(valeurMesurer, 0, 1, 1, 1);
+
+        valeurMesurerEnergie = new QLabel(frameEnergie);
+        valeurMesurerEnergie->setObjectName("valeurMesurerEnergie");
+        valeurMesurerEnergie->setStyleSheet(QString::fromUtf8("font: 20pt \"Segoe UI\";"));
+
+        _10->addWidget(valeurMesurerEnergie, 1, 1, 1, 1);
 
 
         verticalLayout_2->addWidget(frameEnergie);
@@ -353,18 +409,31 @@ public:
         _8 = new QGridLayout(frameCourantEmission);
         _8->setSpacing(6);
         _8->setObjectName("_8");
+        lineEditCourantEmission = new QLineEdit(frameCourantEmission);
+        lineEditCourantEmission->setObjectName("lineEditCourantEmission");
+        lineEditCourantEmission->setFont(font);
+
+        _8->addWidget(lineEditCourantEmission, 1, 0, 1, 1);
+
         labelCourantEmission = new QLabel(frameCourantEmission);
         labelCourantEmission->setObjectName("labelCourantEmission");
-        labelCourantEmission->setFont(font);
+        labelCourantEmission->setFont(font1);
         labelCourantEmission->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         _8->addWidget(labelCourantEmission, 0, 0, 1, 1);
 
-        lineEditCourantEmission = new QLineEdit(frameCourantEmission);
-        lineEditCourantEmission->setObjectName("lineEditCourantEmission");
-        lineEditCourantEmission->setFont(font1);
+        valeurMesurerCourantEmission = new QLabel(frameCourantEmission);
+        valeurMesurerCourantEmission->setObjectName("valeurMesurerCourantEmission");
+        valeurMesurerCourantEmission->setStyleSheet(QString::fromUtf8("font: 20pt \"Segoe UI\";"));
 
-        _8->addWidget(lineEditCourantEmission, 1, 0, 1, 1);
+        _8->addWidget(valeurMesurerCourantEmission, 1, 1, 1, 1);
+
+        valeurMesurer_3 = new QLabel(frameCourantEmission);
+        valeurMesurer_3->setObjectName("valeurMesurer_3");
+        valeurMesurer_3->setFont(font1);
+        valeurMesurer_3->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _8->addWidget(valeurMesurer_3, 0, 1, 1, 1);
 
 
         verticalLayout_2->addWidget(frameCourantEmission);
@@ -384,26 +453,34 @@ public:
         frameFocus->setFrameShadow(QFrame::Shadow::Plain);
         frameFocus->setLineWidth(1);
         _9 = new QGridLayout(frameFocus);
-#ifndef Q_OS_MAC
         _9->setSpacing(6);
-#endif
-#ifndef Q_OS_MAC
-        _9->setContentsMargins(9, 9, 9, 9);
-#endif
         _9->setObjectName("_9");
+        lineEditFocus = new QLineEdit(frameFocus);
+        lineEditFocus->setObjectName("lineEditFocus");
+        lineEditFocus->setFont(font);
+
+        _9->addWidget(lineEditFocus, 1, 0, 1, 1);
+
         labelFocus = new QLabel(frameFocus);
         labelFocus->setObjectName("labelFocus");
-        labelFocus->setFont(font);
+        labelFocus->setFont(font1);
         labelFocus->setMouseTracking(false);
         labelFocus->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         _9->addWidget(labelFocus, 0, 0, 1, 1);
 
-        lineEditFocus = new QLineEdit(frameFocus);
-        lineEditFocus->setObjectName("lineEditFocus");
-        lineEditFocus->setFont(font1);
+        valeurMesurer_2 = new QLabel(frameFocus);
+        valeurMesurer_2->setObjectName("valeurMesurer_2");
+        valeurMesurer_2->setFont(font1);
+        valeurMesurer_2->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
-        _9->addWidget(lineEditFocus, 1, 0, 1, 1);
+        _9->addWidget(valeurMesurer_2, 0, 1, 1, 1);
+
+        valeurMesurerFocus = new QLabel(frameFocus);
+        valeurMesurerFocus->setObjectName("valeurMesurerFocus");
+        valeurMesurerFocus->setStyleSheet(QString::fromUtf8("font: 20pt \"Segoe UI\";"));
+
+        _9->addWidget(valeurMesurerFocus, 1, 1, 1, 1);
 
 
         verticalLayout_2->addWidget(frameFocus);
@@ -425,30 +502,43 @@ public:
         _7 = new QGridLayout(frameWehnelt);
         _7->setSpacing(6);
         _7->setObjectName("_7");
-        lineEdiWehnelt = new QLineEdit(frameWehnelt);
-        lineEdiWehnelt->setObjectName("lineEdiWehnelt");
-        lineEdiWehnelt->setFont(font1);
-
-        _7->addWidget(lineEdiWehnelt, 2, 0, 1, 1);
-
         labelWehnelt = new QLabel(frameWehnelt);
         labelWehnelt->setObjectName("labelWehnelt");
-        labelWehnelt->setFont(font);
+        labelWehnelt->setFont(font1);
         labelWehnelt->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         _7->addWidget(labelWehnelt, 1, 0, 1, 1);
+
+        lineEditWehnelt = new QLineEdit(frameWehnelt);
+        lineEditWehnelt->setObjectName("lineEditWehnelt");
+        lineEditWehnelt->setFont(font);
+
+        _7->addWidget(lineEditWehnelt, 2, 0, 1, 1);
+
+        valeurMesurer_4 = new QLabel(frameWehnelt);
+        valeurMesurer_4->setObjectName("valeurMesurer_4");
+        valeurMesurer_4->setFont(font1);
+        valeurMesurer_4->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _7->addWidget(valeurMesurer_4, 1, 1, 1, 1);
+
+        valeurMesurerWehnelt = new QLabel(frameWehnelt);
+        valeurMesurerWehnelt->setObjectName("valeurMesurerWehnelt");
+        valeurMesurerWehnelt->setStyleSheet(QString::fromUtf8("font: 20pt \"Segoe UI\";"));
+
+        _7->addWidget(valeurMesurerWehnelt, 2, 1, 1, 1);
 
 
         verticalLayout_2->addWidget(frameWehnelt);
 
         ValidatePushButton = new QPushButton(centralwidget);
         ValidatePushButton->setObjectName("ValidatePushButton");
-        ValidatePushButton->setGeometry(QRect(0, 740, 831, 51));
+        ValidatePushButton->setGeometry(QRect(-10, 740, 831, 41));
         ValidatePushButton->setStyleSheet(QString::fromUtf8("font: 15pt \"Segoe UI\";"));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 832, 26));
+        menubar->setGeometry(QRect(0, 0, 850, 26));
         MainWindow->setMenuBar(menubar);
         toolBar = new QToolBar(MainWindow);
         toolBar->setObjectName("toolBar");
@@ -465,16 +555,32 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        label_9->setText(QCoreApplication::translate("MainWindow", "Balayage Y ( V / \302\260 )", nullptr));
+        label_9->setText(QCoreApplication::translate("MainWindow", "Balayage Y ( mm )", nullptr));
+        valeurMesurer_8->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurerBalayageY->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         labelPositionY->setText(QCoreApplication::translate("MainWindow", "Position Y ( mm )", nullptr));
-        labelBalayageX->setText(QCoreApplication::translate("MainWindow", "Balayage X ( V / \302\260 )", nullptr));
+        valeurMesurer_6->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurerPositionY->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        labelBalayageX->setText(QCoreApplication::translate("MainWindow", "Balayage X ( mm )", nullptr));
+        valeurMesurer_7->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurerBalayageX->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         labelPositionX->setText(QCoreApplication::translate("MainWindow", "Position X ( mm )", nullptr));
+        valeurMesurer_5->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurerPositionX->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         label_1->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">CONFIGURATION</span></p></body></html>", nullptr));
         pushButtonConnexion->setText(QCoreApplication::translate("MainWindow", "Connexion", nullptr));
         labelEnergie->setText(QCoreApplication::translate("MainWindow", "Energie ( eV )", nullptr));
+        valeurMesurer->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurerEnergie->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         labelCourantEmission->setText(QCoreApplication::translate("MainWindow", "Courant d'\303\251mission ( mA )", nullptr));
+        valeurMesurerCourantEmission->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        valeurMesurer_3->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
         labelFocus->setText(QCoreApplication::translate("MainWindow", "Focus ( % )", nullptr));
+        valeurMesurer_2->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurerFocus->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         labelWehnelt->setText(QCoreApplication::translate("MainWindow", "Wehnelt ( 1 / 10 V )", nullptr));
+        valeurMesurer_4->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurerWehnelt->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         ValidatePushButton->setText(QCoreApplication::translate("MainWindow", "Valider", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi

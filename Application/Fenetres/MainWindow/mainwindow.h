@@ -19,12 +19,14 @@ public:
 private slots:
     void connexion_button_clicked();
     void validate_button_clicked();
-    void transmissionResultat();
+    void transmissionResultatRecu(QString &CurrentEnergie, QString &CurrentCourantEmission, QString &CurrentFocus, QString &CurrentWehnelt,
+                                  QString &CurrentPosX, QString &CurrentPosY, QString &CurrentBalX, QString &CurrentBalY);
 
 
 private:
     Ui::MainWindow *m_ui; //this
     FenetreConnexion *m_fenetreConnexion; // Correction du type
+    Communication *m_communication;
 };
 
 #endif // MAINWINDOW_H
