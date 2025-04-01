@@ -961,7 +961,7 @@ border-color: rgb(0, 0, 255);</string>
            </font>
           </property>
           <property name="text">
-           <string>Courant d'émission ( mA )</string>
+           <string>Courant d'émission ( µA )</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignmentFlag::AlignCenter</set>
@@ -1093,6 +1093,34 @@ border-color: rgb(0, 0, 255);</string>
           </property>
          </widget>
         </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="valeurMesurer_2">
+          <property name="font">
+           <font>
+            <pointsize>14</pointsize>
+            <bold>false</bold>
+            <strikeout>false</strikeout>
+            <kerning>false</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Valeur mesurée</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignmentFlag::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="valeurMesurerFocus">
+          <property name="styleSheet">
+           <string notr="true">font: 20pt &quot;Segoe UI&quot;;</string>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QLabel" name="labelFocus">
           <property name="font">
@@ -1114,8 +1142,8 @@ border-color: rgb(0, 0, 255);</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="valeurMesurer_2">
+        <item row="0" column="2">
+         <widget class="QLabel" name="valeurMesurer_9">
           <property name="font">
            <font>
             <pointsize>14</pointsize>
@@ -1132,8 +1160,8 @@ border-color: rgb(0, 0, 255);</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
-         <widget class="QLabel" name="valeurMesurerFocus">
+        <item row="1" column="2">
+         <widget class="QLabel" name="valeurMesurerFocusEv">
           <property name="styleSheet">
            <string notr="true">font: 20pt &quot;Segoe UI&quot;;</string>
           </property>
@@ -1238,7 +1266,7 @@ border-color: rgb(0, 0, 255);</string>
            </font>
           </property>
           <property name="text">
-           <string>Wehnelt ( 1 / 10 V )</string>
+           <string>Wehnelt ( V )</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignmentFlag::AlignCenter</set>

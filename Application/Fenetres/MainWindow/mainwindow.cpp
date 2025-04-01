@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "Fenetres/Connexion/fenetreconnexion.h" // Inclure la bonne classe
 #include "ui_mainwindow.h"
-
+#include <string>
 #include <QDebug>
 
 // Constructeur
@@ -22,17 +22,54 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-
+// Règle les problèmes de conversion du manuel et affiche sur l'application les paramètres récupérés.
 void MainWindow::transmissionResultatRecu(QString &CurrentEnergie, QString &CurrentCourantEmission, QString &CurrentFocus, QString &CurrentWehnelt,
                                           QString &CurrentPosX, QString &CurrentPosY, QString &CurrentBalX, QString &CurrentBalY) {
-    m_ui->lineEditCourantEmission->setText(CurrentCourantEmission);
-    m_ui->lineEditFocus->setText(CurrentFocus);
-    m_ui->lineEditEnergie->setText(CurrentEnergie);
-    m_ui->lineEditWehnelt->setText(CurrentWehnelt);
-    m_ui->lineEditPositionX->setText(CurrentPosX);
-    m_ui->lineEditPositionY->setText(CurrentPosY);
-    m_ui->lineEditBalayageX->setText(CurrentBalX);
-    m_ui->lineEditBalayageY->setText(CurrentBalY);
+
+
+
+
+    m_ui->valeurMesurerEnergie->setText(CurrentEnergie + "eV");
+
+    float CurrentCourantEmissionInt = CurrentCourantEmission.toFloat() / 100 ; // x100 pour mettre en % et x100 pour corriger l'erreur d'échelle du manuel
+    QString CurrentCourantEmissionIntStr = QString::number(CurrentCourantEmissionInt);
+    m_ui->valeurMesurerCourantEmission->setText(CurrentCourantEmissionIntStr + " µA");
+
+    m_ui->valeurMesurerFocus->setText(CurrentFocus + " V");
+
+    // Conversion pour calcul du pourcentage
+    float CurrentFocusInt = CurrentFocus.toFloat();
+    float CurrentEnergieInt = CurrentEnergie.toFloat();
+    float pourcentageInt =  CurrentFocusInt / CurrentEnergieInt * 100 ; // x100 pour mettre en % et x100 pour corriger l'erreur d'échelle du manuel
+    QString pourcentageStr = QString::number(pourcentageInt);
+    m_ui->valeurMesurerFocusEv->setText(pourcentageStr + " %");
+
+
+    float CurrentWehneltInt =  CurrentWehnelt.toFloat() / 10 ;
+    QString CurrentWehneltStr = QString::number(CurrentWehneltInt);
+    m_ui->valeurMesurerWehnelt->setText(CurrentWehneltStr + " V");
+
+
+
+
+    float CurrentPosXInt =  CurrentPosX.toFloat() / 1000 ;
+    QString CurrentPosXStr = QString::number(CurrentPosXInt);
+    m_ui->valeurMesurerPositionX->setText(CurrentPosXStr + " mm");
+
+
+    float CurrentPosYInt =  CurrentPosY.toFloat() / 1000 ;
+    QString CurrentPosYStr = QString::number(CurrentPosYInt);
+    m_ui->valeurMesurerPositionY->setText(CurrentPosYStr+  " mm");
+
+
+
+    float CurrentBalXInt =  CurrentBalX.toFloat() / 1000 ;
+    QString CurrentBalXStr = QString::number(CurrentBalXInt);
+    m_ui->valeurMesurerBalayageX->setText(CurrentBalXStr +  " mm");
+
+    float CurrentBalYInt =  CurrentBalY.toFloat() / 1000 ;
+    QString CurrentBalYStr = QString::number(CurrentBalYInt);
+    m_ui->valeurMesurerBalayageY->setText(CurrentBalYStr +  " mm");
 }
 
 
@@ -43,28 +80,18 @@ void MainWindow::transmissionResultatRecu(QString &CurrentEnergie, QString &Curr
 // Récupére les valeurs des editLine et modifie les paramètres de l'alimentation
 void MainWindow::validate_button_clicked()
 {
-    QString x;
     QString y;
-    QString z;
     // =========================
     // Modification de l'énergie de l'alimentation ( attention valeur entre 0 et 5000 | eV )
     // =========================
     QString Energie = m_ui->lineEditEnergie->text().trimmed();
     if(!Energie.isEmpty()){
-        qDebug() << "-------------------------------------";
-
-        m_communication->envoyer("EN ?");
-        x = m_communication->recevoir();
-        qDebug() << "Lecture valeur energie avant changement : " + x;
 
         qDebug() << "-------------------------------------";
         m_communication->envoyer("EN " + Energie); // N'envoie pas la commande
         y = m_communication->recevoir();
         qDebug() << "Energie : " + Energie + " Réponse du changement d'énergie : " + y;
 
-        m_communication->envoyer("EN ?");
-        z = m_communication->recevoir();
-        qDebug() << "Lecture valeur energie après changement : " + z;
 
         qDebug() << "-------------------------------------";
     } else {
@@ -72,12 +99,16 @@ void MainWindow::validate_button_clicked()
     }
 
     // =========================
-    // Modification du courant d'émission ( attention valeur entre 10 et 10000 | mA )
+    // Modification du courant d'émission
     // =========================
     QString CourantEmission = m_ui->lineEditCourantEmission->text().trimmed();
     if(!CourantEmission.isEmpty()){
-        m_communication->envoyer("EC " + CourantEmission);
-        qDebug() << "Courant d'émission : " + CourantEmission;
+
+        int CourantEmissionInt = CourantEmission.toInt()*100;
+        QString CourantEmissionStr = QString::number(CourantEmissionInt);
+
+        m_communication->envoyer("EC " + CourantEmissionStr);
+        qDebug() << "Courant d'émission : " + CourantEmissionStr;
     } else {
         qDebug() << "Aucune valeur renseignée pour le courant d'émission";
     }
@@ -87,8 +118,13 @@ void MainWindow::validate_button_clicked()
     // =========================
     QString Focus = m_ui->lineEditFocus->text().trimmed();
     if(!Focus.isEmpty()){
-        m_communication->envoyer("F1 " + Focus);
-        qDebug() << "Focus : " + Focus;
+
+        int FocusInt = Focus.toInt()*100;
+        QString FocusStr = QString::number(FocusInt);
+
+
+        m_communication->envoyer("F1 " + FocusStr);
+        qDebug() << "Focus : " + FocusStr;
     } else {
         qDebug() << "Aucune valeur renseignée pour le focus";
     }
@@ -99,19 +135,15 @@ void MainWindow::validate_button_clicked()
     QString Wehnelt = m_ui->lineEditWehnelt->text().trimmed();
     if(!Wehnelt.isEmpty()){
 
-        m_communication->envoyer("WE ?");
-        x = m_communication->recevoir();
-        qDebug() << "Lecture valeur Wehnelt avant changement : " + x;
+        int WehneltInt = Wehnelt.toInt()*10;
+        QString WehneltStr = QString::number(WehneltInt);
 
-        m_communication->envoyer("WE " + Wehnelt);
+        m_communication->envoyer("WE " + WehneltStr);
         y = m_communication->recevoir();
         qDebug() << "Changement valeur Wehnelt " + y;
 
-        m_communication->envoyer("WE ?");
-        z = m_communication->recevoir();
-        qDebug() << "Lecture valeur Wehnelt après changement : " + z;
 
-        qDebug() << "Wehnelt : " + Wehnelt;
+        qDebug() << "Wehnelt : " + WehneltStr;
     } else {
         qDebug() << "Aucune valeur renseignée pour le Wehnelt";
     }
@@ -121,8 +153,13 @@ void MainWindow::validate_button_clicked()
     // =========================
     QString PositionX = m_ui->lineEditPositionX->text().trimmed();
     if(!PositionX.isEmpty()){
-        m_communication->envoyer("X0 " + PositionX);
-        qDebug() << "Position X : " + PositionX;
+
+
+        int PositionXInt = PositionX.toInt()*100;
+        QString PositionXStr = QString::number(PositionXInt);
+
+        m_communication->envoyer("X0 " + PositionXStr);
+        qDebug() << "Position X : " + PositionXStr;
     } else {
         qDebug() << "Aucune valeur renseignée pour la position X";
     }
@@ -132,8 +169,13 @@ void MainWindow::validate_button_clicked()
     // =========================
     QString PositionY = m_ui->lineEditPositionY->text().trimmed();
     if(!PositionY.isEmpty()){
-        m_communication->envoyer("Y0 " + PositionY);
-        qDebug() << "Position Y : " + PositionY;
+
+        int PositionYInt = PositionY.toInt()*100;
+        QString PositionYStr = QString::number(PositionYInt);
+
+
+        m_communication->envoyer("Y0 " + PositionYStr);
+        qDebug() << "Position Y : " + PositionYStr;
     } else {
         qDebug() << "Aucune valeur renseignée pour la position Y";
     }
@@ -143,8 +185,13 @@ void MainWindow::validate_button_clicked()
     // =========================
     QString BalayageX = m_ui->lineEditBalayageX->text().trimmed();
     if(!BalayageX.isEmpty()){
-        m_communication->envoyer("WX " + BalayageX);
-        qDebug() << "Balayage X : " + BalayageX;
+
+        int BalayageXInt = BalayageX.toInt()*10;
+        QString BalayageXStr = QString::number(BalayageXInt);
+
+
+        m_communication->envoyer("WX " + BalayageXStr);
+        qDebug() << "Balayage X : " + BalayageXStr;
     } else {
         qDebug() << "Aucune valeur renseignée pour le balayage X";
     }
@@ -154,8 +201,13 @@ void MainWindow::validate_button_clicked()
     // =========================
     QString BalayageY = m_ui->lineEditBalayageY->text().trimmed();
     if(!BalayageY.isEmpty()){
-        m_communication->envoyer("WY " + BalayageY);
-        qDebug() << "Balayage Y : " + BalayageY;
+
+        int BalayageyInt = BalayageY.toInt()*10;
+        QString BalayageyStr = QString::number(BalayageyInt);
+
+
+        m_communication->envoyer("WY " + BalayageyStr);
+        qDebug() << "Balayage Y : " + BalayageyStr;
     } else {
         qDebug() << "Aucune valeur renseignée pour le balayage Y";
     }

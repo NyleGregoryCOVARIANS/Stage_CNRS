@@ -76,9 +76,11 @@ public:
     QFrame *frameFocus;
     QGridLayout *_9;
     QLineEdit *lineEditFocus;
-    QLabel *labelFocus;
     QLabel *valeurMesurer_2;
     QLabel *valeurMesurerFocus;
+    QLabel *labelFocus;
+    QLabel *valeurMesurer_9;
+    QLabel *valeurMesurerFocusEv;
     QFrame *frameWehnelt;
     QGridLayout *_7;
     QLabel *labelWehnelt;
@@ -461,14 +463,6 @@ public:
 
         _9->addWidget(lineEditFocus, 1, 0, 1, 1);
 
-        labelFocus = new QLabel(frameFocus);
-        labelFocus->setObjectName("labelFocus");
-        labelFocus->setFont(font1);
-        labelFocus->setMouseTracking(false);
-        labelFocus->setAlignment(Qt::AlignmentFlag::AlignCenter);
-
-        _9->addWidget(labelFocus, 0, 0, 1, 1);
-
         valeurMesurer_2 = new QLabel(frameFocus);
         valeurMesurer_2->setObjectName("valeurMesurer_2");
         valeurMesurer_2->setFont(font1);
@@ -481,6 +475,27 @@ public:
         valeurMesurerFocus->setStyleSheet(QString::fromUtf8("font: 20pt \"Segoe UI\";"));
 
         _9->addWidget(valeurMesurerFocus, 1, 1, 1, 1);
+
+        labelFocus = new QLabel(frameFocus);
+        labelFocus->setObjectName("labelFocus");
+        labelFocus->setFont(font1);
+        labelFocus->setMouseTracking(false);
+        labelFocus->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _9->addWidget(labelFocus, 0, 0, 1, 1);
+
+        valeurMesurer_9 = new QLabel(frameFocus);
+        valeurMesurer_9->setObjectName("valeurMesurer_9");
+        valeurMesurer_9->setFont(font1);
+        valeurMesurer_9->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        _9->addWidget(valeurMesurer_9, 0, 2, 1, 1);
+
+        valeurMesurerFocusEv = new QLabel(frameFocus);
+        valeurMesurerFocusEv->setObjectName("valeurMesurerFocusEv");
+        valeurMesurerFocusEv->setStyleSheet(QString::fromUtf8("font: 20pt \"Segoe UI\";"));
+
+        _9->addWidget(valeurMesurerFocusEv, 1, 2, 1, 1);
 
 
         verticalLayout_2->addWidget(frameFocus);
@@ -556,30 +571,32 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         label_9->setText(QCoreApplication::translate("MainWindow", "Balayage Y ( mm )", nullptr));
-        valeurMesurer_8->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurer_8->setText(QCoreApplication::translate("MainWindow", "Valeur mesur\303\251e", nullptr));
         valeurMesurerBalayageY->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         labelPositionY->setText(QCoreApplication::translate("MainWindow", "Position Y ( mm )", nullptr));
-        valeurMesurer_6->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurer_6->setText(QCoreApplication::translate("MainWindow", "Valeur mesur\303\251e", nullptr));
         valeurMesurerPositionY->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         labelBalayageX->setText(QCoreApplication::translate("MainWindow", "Balayage X ( mm )", nullptr));
-        valeurMesurer_7->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurer_7->setText(QCoreApplication::translate("MainWindow", "Valeur mesur\303\251e", nullptr));
         valeurMesurerBalayageX->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         labelPositionX->setText(QCoreApplication::translate("MainWindow", "Position X ( mm )", nullptr));
-        valeurMesurer_5->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurer_5->setText(QCoreApplication::translate("MainWindow", "Valeur mesur\303\251e", nullptr));
         valeurMesurerPositionX->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         label_1->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">CONFIGURATION</span></p></body></html>", nullptr));
         pushButtonConnexion->setText(QCoreApplication::translate("MainWindow", "Connexion", nullptr));
         labelEnergie->setText(QCoreApplication::translate("MainWindow", "Energie ( eV )", nullptr));
-        valeurMesurer->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurer->setText(QCoreApplication::translate("MainWindow", "Valeur mesur\303\251e", nullptr));
         valeurMesurerEnergie->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        labelCourantEmission->setText(QCoreApplication::translate("MainWindow", "Courant d'\303\251mission ( mA )", nullptr));
+        labelCourantEmission->setText(QCoreApplication::translate("MainWindow", "Courant d'\303\251mission ( \302\265A )", nullptr));
         valeurMesurerCourantEmission->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        valeurMesurer_3->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
-        labelFocus->setText(QCoreApplication::translate("MainWindow", "Focus ( % )", nullptr));
-        valeurMesurer_2->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        valeurMesurer_3->setText(QCoreApplication::translate("MainWindow", "Valeur mesur\303\251e", nullptr));
+        valeurMesurer_2->setText(QCoreApplication::translate("MainWindow", "Valeur mesur\303\251e", nullptr));
         valeurMesurerFocus->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        labelWehnelt->setText(QCoreApplication::translate("MainWindow", "Wehnelt ( 1 / 10 V )", nullptr));
-        valeurMesurer_4->setText(QCoreApplication::translate("MainWindow", "Valeur mesurer", nullptr));
+        labelFocus->setText(QCoreApplication::translate("MainWindow", "Focus ( % )", nullptr));
+        valeurMesurer_9->setText(QCoreApplication::translate("MainWindow", "Valeur mesur\303\251e", nullptr));
+        valeurMesurerFocusEv->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        labelWehnelt->setText(QCoreApplication::translate("MainWindow", "Wehnelt ( V )", nullptr));
+        valeurMesurer_4->setText(QCoreApplication::translate("MainWindow", "Valeur mesur\303\251e", nullptr));
         valeurMesurerWehnelt->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         ValidatePushButton->setText(QCoreApplication::translate("MainWindow", "Valider", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));

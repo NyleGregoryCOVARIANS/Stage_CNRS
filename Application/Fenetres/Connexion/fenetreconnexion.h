@@ -17,6 +17,7 @@ public:
     FenetreConnexion(QWidget *parent = nullptr); // Constructeur par defaut au cas ou
     FenetreConnexion(QWidget *parent = nullptr, Communication *communication = nullptr);
     ~FenetreConnexion();
+    void ActualisationMesures();
 
 signals:
     void transmissionResultatPret( QString &CurrentEnergie, QString &CurrentCourantEmission, QString &CurrentFocus, QString &CurrentWehnelt,
@@ -31,6 +32,8 @@ private:
     QString m_com;
     QString m_baudRate;
     Communication *m_communication;
+    QTimer *m_timer;
+
 };
 
 #endif // FENETRECONNEXION_H
