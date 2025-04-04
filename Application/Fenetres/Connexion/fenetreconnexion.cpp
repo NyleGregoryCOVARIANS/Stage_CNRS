@@ -39,94 +39,21 @@ void FenetreConnexion::on_pushButton_rs232_clicked()
     m_baudRate = m_ui->comboBox->currentText();
     bool estConnecte = m_communication->connexion(m_com, m_baudRate);
 
-    m_communication->envoyer("RE"); // Activation du remote
-    qDebug() << m_communication->recevoir();
+    if (estConnecte) {
+        m_communication->envoyer("RE");
+        qDebug() << m_communication->recevoir();
 
-    m_communication->envoyer("HE 2"); // Activation du haut voltage
-    qDebug() << m_communication->recevoir();
+        m_communication->envoyer("HE 2");
+        qDebug() << m_communication->recevoir();
 
-    m_communication->envoyer("OP 1"); // Activation du haut voltage
-    qDebug() << m_communication->recevoir();
+        m_communication->envoyer("OP 1");
+        qDebug() << m_communication->recevoir();
 
-    qDebug() << "--------------------------------";
-    qDebug() << "Suis-je connecte ? " + QVariant(estConnecte).toString();
-    qDebug() << "m_com : " + m_com;
-    qDebug() << "m_baudRate : " + m_baudRate;
+        qDebug() << "--------------------------------";
+        qDebug() << "Connexion réussie !";
 
-
-    // Récupère les paramètres et les affiches toutes les 5 secondes
-    ActualisationMesures();
-    if (!m_timer) {
-        m_timer = new QTimer(this);  // Assurez-vous que m_timer est bien initialisé
+        emit connexionEtablie(); // Envoie le signal à MainWindow
     }
-    connect(m_timer, &QTimer::timeout, this, &FenetreConnexion::ActualisationMesures); // Connecter le signal timeout du timer à la fonction ActualisationMesures
-    m_timer->start(10000);     // Lancer le timer pour exécuter la fonction toutes les 1000 ms (5 seconde)
-
 
     this->hide();
-}
-
-
-// Récupère tous les paramètres de l'alimentation et les transmets à mainWindow
-void FenetreConnexion::ActualisationMesures(){
-    qDebug() << "ACTUALISATION";
-
-
-    // Initialisation des variables
-    QString resultatRequeteEnergie;
-    QString resultatRequeteCourantEmission;
-    QString resultatRequeteFocus;
-    QString resultatRequeteWehnelt;
-    QString resultatRequetePosX;
-    QString resultatRequetePosY;
-    QString resultatRequeteBalX;
-    QString resultatRequeteBalY;
-
-
-
-
-    // Demande de récupérer l'énergie actuelle et l'affiche
-    m_communication->envoyer("EN ?");
-    resultatRequeteEnergie = m_communication->recevoir();
-    qDebug() << "Résultat de la requête energie est : " + resultatRequeteEnergie;
-
-    // Demande de récupérer le courant d'émission actuelle et l'affiche
-    m_communication->envoyer("EC ?");
-    resultatRequeteCourantEmission = m_communication->recevoir();
-    qDebug() << "Résultat de la requête courant emission est : " + resultatRequeteCourantEmission;
-
-    // Demande de récupérer le focus actuelle et l'affiche
-    m_communication->envoyer("F1 ?");
-    resultatRequeteFocus = m_communication->recevoir();
-    qDebug() << "Résultat de la requête focus est : " + resultatRequeteFocus;
-
-    // Demande de récupérer le wehnelt actuelle et l'affiche
-    m_communication->envoyer("WE ?");
-    resultatRequeteWehnelt = m_communication->recevoir();
-    qDebug() << "Résultat de la requête wehnelt est : " + resultatRequeteWehnelt;
-
-    // Demande de récupérer la position X et l'affiche
-    m_communication->envoyer("X0 ?");
-    resultatRequetePosX = m_communication->recevoir();
-    qDebug() << "Résultat de la requête Pos X est : " + resultatRequetePosX;
-
-    // Demande de récupérer la position Y et l'affiche
-    m_communication->envoyer("Y0 ?");
-    resultatRequetePosY = m_communication->recevoir();
-    qDebug() << "Résultat de la requête Pos Y est : " + resultatRequetePosY;
-
-    // Demande de récupérer le balayage X et l'affiche
-    m_communication->envoyer("WX ?");
-    resultatRequeteBalX = m_communication->recevoir();
-    qDebug() << "Résultat de la requête bal X est : " + resultatRequeteBalX;
-
-    // Demande de récupérer le balayage Y et l'affiche
-    m_communication->envoyer("WY ?");
-    resultatRequeteBalY = m_communication->recevoir();
-    qDebug() << "Résultat de la requête balY est : " + resultatRequeteBalY;
-
-    // transmission des paramètres
-    emit transmissionResultatPret(resultatRequeteEnergie, resultatRequeteCourantEmission, resultatRequeteFocus, resultatRequeteWehnelt, resultatRequetePosX,
-     resultatRequetePosY,resultatRequeteBalX, resultatRequeteBalY);
-
 }

@@ -12,6 +12,7 @@ CONFIG += c++17
 SOURCES += \
     Classes/Alimentation/alimentation.cpp \
     Classes/Communication/communication.cpp \
+    Classes/ReleverMesure/relevermesure.cpp \
     Classes/ThreadMesure/threadmesure.cpp \
     Fenetres/Connexion/fenetreconnexion.cpp \
     main.cpp \
@@ -20,7 +21,7 @@ SOURCES += \
 HEADERS += \
     Classes/Alimentation/alimentation.h \
     Classes/Communication/communication.h \
-    Classes/ThreadMesure/threadmesure.h \
+    Classes/ReleverMesure/relevermesure.h \
     Fenetres/Connexion/fenetreconnexion.h \
     Fenetres/MainWindow/mainwindow.h \
 

@@ -42,7 +42,6 @@ static constexpr auto qt_meta_stringdata_ZN10MainWindowE = QtMocHelpers::stringD
     "",
     "validate_button_clicked",
     "transmissionResultatRecu",
-    "QString&",
     "CurrentEnergie",
     "CurrentCourantEmission",
     "CurrentFocus",
@@ -77,7 +76,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN10MainWindowE[] = {
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 5, 0x80000000 | 5,    6,    7,    8,    9,   10,   11,   12,   13,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,    5,    6,    7,    8,    9,   10,   11,   12,
 
        0        // eod
 };
@@ -97,14 +96,14 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'transmissionResultatRecu'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QString &, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QString &, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QString &, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QString &, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QString &, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QString &, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QString &, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QString &, std::false_type>
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>
     >,
     nullptr
 } };
@@ -116,7 +115,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         switch (_id) {
         case 0: _t->connexion_button_clicked(); break;
         case 1: _t->validate_button_clicked(); break;
-        case 2: _t->transmissionResultatRecu((*reinterpret_cast< std::add_pointer_t<QString&>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString&>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString&>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString&>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<QString&>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<QString&>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<QString&>>(_a[7])),(*reinterpret_cast< std::add_pointer_t<QString&>>(_a[8]))); break;
+        case 2: _t->transmissionResultatRecu((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[7])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[8]))); break;
         default: ;
         }
     }

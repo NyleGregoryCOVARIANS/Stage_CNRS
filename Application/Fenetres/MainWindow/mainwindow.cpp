@@ -3,31 +3,37 @@
 #include "ui_mainwindow.h"
 #include <string>
 #include <QDebug>
+#include "Classes/ReleverMesure/relevermesure.h"  // Ajoute l'inclusion de la nouvelle classe
 
-// Constructeur
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , m_ui(new Ui::MainWindow)
 {
-    m_ui->setupUi(this); // Charge l'interface graphique
-    m_communication = new Communication(); // Crée une instance de communication
-    m_fenetreConnexion = new FenetreConnexion(this, m_communication); // Crée une instance d'une fenêtre de connexion
+    m_ui->setupUi(this);
+    m_communication = new Communication();
+    m_fenetreConnexion = new FenetreConnexion(this, m_communication);
+    m_releverMesure = new ReleverMesure(m_communication, this);
 
+    connect(m_fenetreConnexion, &FenetreConnexion::connexionEtablie,
+            m_releverMesure, &ReleverMesure::actualisationMesures); // Lance une mesure après connexion
 
-    connect(m_fenetreConnexion, &FenetreConnexion::transmissionResultatPret, this, &MainWindow::transmissionResultatRecu);
-    connect(m_ui->pushButtonConnexion, &QPushButton::clicked, this, &MainWindow::connexion_button_clicked); // Si le bouton connexion est cliqué, alors lance la fonction connexion_button_clicked() qui affiche la fenêtre de connexion
-    connect(m_ui->ValidatePushButton, &QPushButton::clicked, this, &MainWindow::validate_button_clicked);
+    connect(m_releverMesure, &ReleverMesure::transmissionResultatPret,
+            this, &MainWindow::transmissionResultatRecu);
+    connect(m_ui->pushButtonConnexion, &QPushButton::clicked,
+            this, &MainWindow::connexion_button_clicked);
+    connect(m_ui->ValidatePushButton, &QPushButton::clicked,
+            this, &MainWindow::validate_button_clicked);
+
     this->show();
 }
 
 
 
+
 // Règle les problèmes de conversion du manuel et affiche sur l'application les paramètres récupérés.
-void MainWindow::transmissionResultatRecu(QString &CurrentEnergie, QString &CurrentCourantEmission, QString &CurrentFocus, QString &CurrentWehnelt,
-                                          QString &CurrentPosX, QString &CurrentPosY, QString &CurrentBalX, QString &CurrentBalY) {
-
-
-
+void MainWindow::transmissionResultatRecu(QString CurrentEnergie, QString CurrentCourantEmission, QString CurrentFocus, QString CurrentWehnelt,
+                                          QString CurrentPosX, QString CurrentPosY, QString CurrentBalX, QString CurrentBalY) {
 
     m_ui->valeurMesurerEnergie->setText(CurrentEnergie + "eV");
 
