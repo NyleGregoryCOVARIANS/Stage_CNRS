@@ -18,7 +18,7 @@ class FenetreConnexion : public QDialog
 public:
     // Le constructeur est surcharge pour pouvoir créer un objet de la classe FenetreConnexion de 2 manieres
     FenetreConnexion(QWidget *parent = nullptr); // Constructeur par defaut au cas ou
-    FenetreConnexion(QWidget *parent = nullptr, Communication *communication = nullptr);
+    explicit FenetreConnexion(QWidget *parent, Communication *comSPECS, Communication *comPICO);
     ~FenetreConnexion();
 
 private slots:
@@ -31,10 +31,13 @@ signals:
 private:
     Ui::FenetreConnexion *m_ui;
 
-    QString m_com;
-    QString m_baudRate;
-    Communication *m_communication;
-    QTimer *m_timer;
+    Communication *m_communication_SPECS;
+    Communication *m_communication_PICO;
+
+public:
+    bool estConnecteSPECS, estConnectePICO;
+    QString m_com_SPECS, m_com_PICO;
+    QString m_baudRate_SPECS, m_baudRate_PICO;
 
 };
 

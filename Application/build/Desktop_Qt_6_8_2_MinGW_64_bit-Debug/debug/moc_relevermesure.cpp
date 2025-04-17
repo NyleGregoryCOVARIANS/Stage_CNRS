@@ -38,7 +38,7 @@ struct qt_meta_tag_ZN13ReleverMesureE_t {};
 #ifdef QT_MOC_HAS_STRINGDATA
 static constexpr auto qt_meta_stringdata_ZN13ReleverMesureE = QtMocHelpers::stringData(
     "ReleverMesure",
-    "transmissionResultatPret",
+    "transmissionResultatSPECS",
     "",
     "CurrentEnergie",
     "CurrentCourantEmission",
@@ -48,7 +48,7 @@ static constexpr auto qt_meta_stringdata_ZN13ReleverMesureE = QtMocHelpers::stri
     "CurrentPosY",
     "CurrentBalX",
     "CurrentBalY",
-    "actualisationMesures"
+    "actualisationMesuresSPECS"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -91,7 +91,7 @@ Q_CONSTINIT const QMetaObject ReleverMesure::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_tag_ZN13ReleverMesureE_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<ReleverMesure, std::true_type>,
-        // method 'transmissionResultatPret'
+        // method 'transmissionResultatSPECS'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
@@ -101,7 +101,7 @@ Q_CONSTINIT const QMetaObject ReleverMesure::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
-        // method 'actualisationMesures'
+        // method 'actualisationMesuresSPECS'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -112,8 +112,8 @@ void ReleverMesure::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
     auto *_t = static_cast<ReleverMesure *>(_o);
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: _t->transmissionResultatPret((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[7])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[8]))); break;
-        case 1: _t->actualisationMesures(); break;
+        case 0: _t->transmissionResultatSPECS((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[7])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[8]))); break;
+        case 1: _t->actualisationMesuresSPECS(); break;
         default: ;
         }
     }
@@ -121,7 +121,7 @@ void ReleverMesure::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         int *result = reinterpret_cast<int *>(_a[0]);
         {
             using _q_method_type = void (ReleverMesure::*)(QString , QString , QString , QString , QString , QString , QString , QString );
-            if (_q_method_type _q_method = &ReleverMesure::transmissionResultatPret; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
+            if (_q_method_type _q_method = &ReleverMesure::transmissionResultatSPECS; *reinterpret_cast<_q_method_type *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
@@ -161,7 +161,7 @@ int ReleverMesure::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void ReleverMesure::transmissionResultatPret(QString _t1, QString _t2, QString _t3, QString _t4, QString _t5, QString _t6, QString _t7, QString _t8)
+void ReleverMesure::transmissionResultatSPECS(QString _t1, QString _t2, QString _t3, QString _t4, QString _t5, QString _t6, QString _t7, QString _t8)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t2))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t3))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t4))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t5))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t6))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t7))), const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t8))) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

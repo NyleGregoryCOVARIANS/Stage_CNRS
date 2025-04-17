@@ -2,96 +2,119 @@
 #include "communication.h"
 #include <QRegularExpression> // Isoler uniquement la valeur numérique présente dans la réponse
 
+// Constructeur
 Communication::Communication()
 {
     m_port = new QSerialPort();
 }
 
+// Destructeur
 Communication::~Communication()
 {
     delete m_port;
 }
 
-// Accesseurs
+// Accesseurs : Obtiens le port
 QSerialPort* Communication::obtenirPort() const
 {
     return m_port;
 }
 
+// Se connecte au port série et met en place une configuration par défault
 bool Communication::connexion(const QString& com, const QString& baud)
 {
-    if (m_port->isOpen())
-    {
-        m_port->close();
-    }
 
-    // On donne le nom du COM
+
+    // Configuration de base du port série
     m_port->setPortName(com);
-
-    // On choisit le baud rate
-    int baudInt = baud.toInt();
-    m_port->setBaudRate(baudInt);
-
-    // A definir par defaut
+    m_port->setBaudRate(baud.toInt());
     m_port->setFlowControl(QSerialPort::NoFlowControl);
     m_port->setParity(QSerialPort::NoParity);
     m_port->setDataBits(QSerialPort::Data8);
     m_port->setStopBits(QSerialPort::OneStop);
 
-    // Ouverture du port
+    // Ouverture du port en lecture/écriture
     return m_port->open(QIODevice::ReadWrite);
 }
 
 
+// Envoie une commande à l'alimentation
 bool Communication::envoyer(QString commande)
 {
-    // On doit envoyer commande + <CR> + <LF>
-    commande = commande + "\x0D" + "\x0A";
+    // Ajout des caractères de fin (CR + LF)
+    commande += "\x0D\x0A";
 
-    // On prépare une commande du bon type à envoyer
+    // Conversion en tableau d’octets pour l’envoi
     QByteArray commandeByte = commande.toUtf8();
 
-    // On regarde la valeur de retour de la méthode write() pour voir si l'ecriture a fonctionne
+    // Écriture sur le port série
     int bitsEcrits = m_port->write(commandeByte);
 
-    // Vide les tampons d'entree et de sortie du port serie
+    // Vide les tampons pour forcer l'envoi immédiat
     m_port->flush();
 
-    // On vérifie que la commande est passée en entier
-    bool estDeBonneTaille = bitsEcrits == commande.length();
-
-    return estDeBonneTaille;
+    // Vérifie que toute la commande a bien été transmise
+    return bitsEcrits == commande.length();
 }
 
-
-#include <QRegularExpression>
-
+// Réception de la réponse de l'alimentation
 QString Communication::recevoir()
 {
     QByteArray reponseBrute;
+
+    // Lecture en attente avec timeout : 100 ms max par itération
     while (m_port->waitForReadyRead(100)) {
         reponseBrute += m_port->readAll();
     }
-    QString reponseString = QString(reponseBrute).trimmed(); // Nettoie la chaîne
 
-    // Expression régulière pour extraire tous les nombres
+    //On retire
+    QString reponseString = QString(reponseBrute).trimmed();
+
+    // Expression régulière pour extraire uniquement les valeurs numériques (ex. -42)
     QRegularExpression regex(R"(-?\d+)");
     QRegularExpressionMatchIterator it = regex.globalMatch(reponseString);
 
+    // On garde le dernier nombre trouvé (souvent le plus significatif)
     QString dernierNombre;
     while (it.hasNext()) {
         QRegularExpressionMatch match = it.next();
-        dernierNombre = match.captured(0);  // Garde le dernier nombre trouvé
+        dernierNombre = match.captured(0);
     }
 
     return dernierNombre.isEmpty() ? "" : dernierNombre;
 }
 
+// ==========================
+// Réception pour Keithley 6485
+// ==========================
 
 QString Communication::recevoirKeithley6485()
 {
-    QByteArray reponseBrute = m_port->readLine();
-    QString reponseString = QString(reponseBrute);
+    QByteArray reponseBrute;
 
-    return reponseString;
+    // Étape 1 : attendre jusqu’à ce qu'on ait reçu une fin de ligne
+    if (m_port->waitForReadyRead(2000)) {
+        // Boucle jusqu’à recevoir le caractère '\n' (fin de ligne)
+        while (!reponseBrute.contains('\n')) {
+            if (m_port->waitForReadyRead(100)) {
+                QByteArray chunk = m_port->readAll();
+                reponseBrute += chunk;
+            } else {
+                break; // Timeout intermédiaire
+            }
+        }
+
+        // Étape 2 : convertir en QString et nettoyer
+        QString reponseCompleteString = QString(reponseBrute).trimmed();
+
+
+        QString courant = reponseCompleteString.section(',', 0, 0); // récupère uniquement la 1ère valeur
+
+        return courant;
+    } else {
+        qDebug() << "⛔ Aucune réponse reçue du Keithley.";
+        return "Erreur : Pas de réponse";
+    }
 }
+
+
