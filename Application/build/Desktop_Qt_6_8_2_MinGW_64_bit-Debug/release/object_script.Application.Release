@@ -2,7 +2,6 @@ release/alimentation.o
 release/communication.o
 release/controleinstrument.o
 release/relevermesure.o
-release/threadmesure.o
 release/fenetreconnexion.o
 release/main.o
 release/mainwindow.o

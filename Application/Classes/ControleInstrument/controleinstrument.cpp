@@ -94,10 +94,6 @@ void ControleInstrument::validate_button_clickedPICO(        const QString& Ener
 }
 
 
-
-
-
-
 // Active le mode Operate quand la case est cochée.
 void ControleInstrument::on_checkBoxOperate_toggled(bool checked)
 {
@@ -123,3 +119,35 @@ void ControleInstrument::on_checkBoxHV_toggled(bool checked)
         }
 
 }
+
+
+void ControleInstrument::initialisationPICO(Communication *m_communicationPICO){
+        qDebug() << "--------------OPERATION PICO-----------------";
+
+        // Réinitialisation de l'appareil
+        m_communicationPICO->envoyer("*RST");
+
+        // Activer le Zero Check
+        m_communicationPICO->envoyer("SYST:ZCH ON");
+
+        // Plage fixe
+        m_communicationPICO->envoyer("CURR:RANG:AUTO ON");
+
+        // Initier la mesure pour capter l'offset
+        m_communicationPICO->envoyer("INIT");
+
+        // Acquisition de la correction de zéro
+        m_communicationPICO->envoyer("SYST:ZCOR:ACQ");
+
+        // Activer la correction de zéro
+        m_communicationPICO->envoyer("SYST:ZCOR ON");
+
+        // Remettre en auto-range
+        m_communicationPICO->envoyer("CURR:RANG:AUTO ON");
+
+        // Désactiver le Zero Check
+        m_communicationPICO->envoyer("SYST:ZCH OFF");
+
+}
+
+void ControleInstrument::initialisationSPECS(Communication *m_communicationSPECS){}

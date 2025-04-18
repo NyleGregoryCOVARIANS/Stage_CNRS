@@ -3,6 +3,7 @@
 
 #include "Classes/Communication/communication.h"
 #include <QDialog>
+#include "Classes/ControleInstrument/controleinstrument.h"
 
 
 namespace Ui {
@@ -34,10 +35,15 @@ private:
     Communication *m_communication_SPECS;
     Communication *m_communication_PICO;
 
+    ControleInstrument *m_controleInstrument;
+
+
 public:
     bool estConnecteSPECS, estConnectePICO;
     QString m_com_SPECS, m_com_PICO;
     QString m_baudRate_SPECS, m_baudRate_PICO;
+
+
 
 };
 

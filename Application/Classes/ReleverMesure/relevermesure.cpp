@@ -70,6 +70,15 @@ void ReleverMesure::actualisationMesuresSPECS()
                                   resultatRequeteBalX, resultatRequeteBalY);
 
     // Redémarre le timer pour maintenir la mise à jour périodique
+    float i = 0;
+    while (i < 10) {
+        m_communication_PICO->envoyer("READ?"); // seulement la valeur mesurée
+        QString valeur = m_communication_PICO->recevoirKeithley6485();
+        qDebug() << "📏 Courant mesuré : " << valeur;
+
+        QThread::msleep(100); // Pause de 100 ms
+        i++;
+    }
     this->start();
 }
 

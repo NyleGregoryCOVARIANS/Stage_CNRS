@@ -45,19 +45,13 @@ void FenetreConnexion::on_pushButton_rs232_clicked()
     qDebug() << "PICO port: " << m_communication_PICO->obtenirPort();
 
 
-
+    estConnectePICO = m_communication_PICO->connexion(m_com_PICO, m_baudRate_PICO);
     estConnecteSPECS = m_communication_SPECS->connexion(m_com_SPECS, m_baudRate_SPECS);
 
     if (estConnecteSPECS) {
-        qDebug() << "--------------OPERATION SPECS-----------------";
-        // Activation du remote
-        m_communication_SPECS->envoyer("RE");
-        qDebug() << m_communication_SPECS->recevoir();
-
-        qDebug() << "Connexion SPECS réussie !";
-
+        m_controleInstrument->initialisationPICO(m_communication_PICO);
+        m_controleInstrument->initialisationSPECS(m_communication_SPECS);
         emit connexionEtablie(); // Envoie le signal que la connexion a réussis à MainWindow
-        qDebug() << "---------------------------------------";
 
     }
     else{
@@ -65,51 +59,7 @@ void FenetreConnexion::on_pushButton_rs232_clicked()
     }
 
 
-    estConnectePICO = m_communication_PICO->connexion(m_com_PICO, m_baudRate_PICO);
 
-
-
-    if(estConnectePICO){
-        qDebug() << "--------------OPERATION PICO-----------------";
-
-        // Réinitialisation de l'appareil
-        m_communication_PICO->envoyer("*RST");
-
-        // Activer le Zero Check
-        m_communication_PICO->envoyer("SYST:ZCH ON");
-
-        // Plage fixe
-        m_communication_PICO->envoyer("CURR:RANG:AUTO ON");
-
-        // Initier la mesure pour capter l'offset
-        m_communication_PICO->envoyer("INIT");
-
-        // Acquisition de la correction de zéro
-        m_communication_PICO->envoyer("SYST:ZCOR:ACQ");
-
-        // Activer la correction de zéro
-        m_communication_PICO->envoyer("SYST:ZCOR ON");
-
-        // Remettre en auto-range
-        m_communication_PICO->envoyer("CURR:RANG:AUTO ON");
-
-        // Désactiver le Zero Check
-        m_communication_PICO->envoyer("SYST:ZCH OFF");
-
-        float i = 0;
-        while (i < 10) {
-            m_communication_PICO->envoyer("READ?"); // seulement la valeur mesurée
-            QString valeur = m_communication_PICO->recevoirKeithley6485();
-            qDebug() << "📏 Courant mesuré : " << valeur;
-
-            QThread::msleep(100); // Pause de 100 ms
-            i++;
-        }
-
-    }
-    else{
-        qDebug() << "Echec de connection PICO";
-    }
 
 
     this->hide();

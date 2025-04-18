@@ -12,6 +12,9 @@ class ControleInstrument : public QObject
 public:
     explicit ControleInstrument(Communication* communicationSPECS, QObject *parent = nullptr);
 
+    void initialisationSPECS(Communication *m_communicationSPECS);
+    void initialisationPICO(Communication *m_communicationPICO);
+
     void validate_button_clickedSPECS(
         const QString& Energie,
         const QString& CourantEmission,

@@ -14,7 +14,6 @@ SOURCES += \
     Classes/Communication/communication.cpp \
     Classes/ControleInstrument/controleinstrument.cpp \
     Classes/ReleverMesure/relevermesure.cpp \
-    Classes/ThreadMesure/threadmesure.cpp \
     Fenetres/Connexion/fenetreconnexion.cpp \
     main.cpp \
     Fenetres/MainWindow/mainwindow.cpp \
