@@ -18,7 +18,7 @@ public:
 
 signals:
     void transmissionResultatSPECS(QString CurrentEnergie, QString CurrentCourantEmission, QString CurrentFocus, QString CurrentWehnelt,
-                                  QString CurrentPosX, QString CurrentPosY, QString CurrentBalX, QString CurrentBalY);
+                                  QString CurrentPosX, QString CurrentPosY, QString CurrentBalX, QString CurrentBalY, QString CurrentCourant);
 
 public slots:
     void actualisationMesuresSPECS();

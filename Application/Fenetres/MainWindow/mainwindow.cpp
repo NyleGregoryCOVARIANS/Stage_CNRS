@@ -74,14 +74,14 @@ MainWindow::MainWindow(QWidget *parent)
 
 // Récupère les paramètres de l'alimentation SPECS, règle les problèmes d'échelles, et affiche les paramètres sur l'application
 void MainWindow::affichageResultatRecuSPECS(QString CurrentEnergie, QString CurrentCourantEmission, QString CurrentFocus, QString CurrentWehnelt,
-                                          QString CurrentPosX, QString CurrentPosY, QString CurrentBalX, QString CurrentBalY) {
+                                          QString CurrentPosX, QString CurrentPosY, QString CurrentBalX, QString CurrentBalY, QString CurrentCourant) {
 
     // Pas de problème d'échelle. Ainsi, affichage des paramètres
     m_ui->valeurMesurerEnergie->setText(CurrentEnergie + "eV");
     m_ui->valeurMesurerFocus->setText(CurrentFocus + " V");
 
 
-    // Correction de l'échelle et affichage des paramètres
+    // Correction de l'échelle et affichage des paramètres de SPECS
     m_ui->valeurMesurerCourantEmission->setText(QString::number(CurrentCourantEmission.toFloat() / 100) + " µA");
     m_ui->valeurMesurerFocusEv->setText(QString::number((CurrentFocus.toFloat() / CurrentEnergie.toFloat()) * 100) + " %");
     m_ui->valeurMesurerWehnelt->setText(QString::number(CurrentWehnelt.toFloat() / 10) + " V");
@@ -89,6 +89,10 @@ void MainWindow::affichageResultatRecuSPECS(QString CurrentEnergie, QString Curr
     m_ui->valeurMesurerPositionY->setText(QString::number(CurrentPosY.toFloat() / 1000) + " mm");
     m_ui->valeurMesurerBalayageX->setText(QString::number(CurrentBalX.toFloat() / 1000) + " mm");
     m_ui->valeurMesurerBalayageY->setText(QString::number(CurrentBalY.toFloat() / 1000) + " mm");
+
+
+    // Affichage du courant
+    m_ui->labelIntensite->setText("Intensité : " + CurrentCourant);
 }
 
 

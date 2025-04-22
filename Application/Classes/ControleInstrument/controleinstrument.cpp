@@ -150,4 +150,7 @@ void ControleInstrument::initialisationPICO(Communication *m_communicationPICO){
 
 }
 
-void ControleInstrument::initialisationSPECS(Communication *m_communicationSPECS){}
+void ControleInstrument::initialisationSPECS(Communication *m_communicationSPECS){
+    qDebug() << "Activation du mode REMOTE";
+    m_communicationSPECS->envoyer("RE");
+}

@@ -26,7 +26,7 @@ private slots:
     void affichageResultatRecuSPECS(QString CurrentEnergie, QString CurrentCourantEmission,
                                   QString CurrentFocus, QString CurrentWehnelt,
                                   QString CurrentPosX, QString CurrentPosY,
-                                  QString CurrentBalX, QString CurrentBalY);
+                                  QString CurrentBalX, QString CurrentBalY, QString CurrentCourant);
 
 
 
@@ -38,6 +38,7 @@ private:
     ReleverMesure * m_releverMesure;
     QString Energie, CourantEmission, Focus, Wehnelt, PositionX, PositionY, BalayageX, BalayageY; // Variables de l'onglet SPECS
     QString EnergieMin, EnergieMax, Pas, Duree; // Variables de l'onglet pico configuration
+    QString CourantPico;
 
     ControleInstrument *m_controleInstrument;
 };

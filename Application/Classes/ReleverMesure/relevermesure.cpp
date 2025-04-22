@@ -40,6 +40,7 @@ void ReleverMesure::actualisationMesuresSPECS()
 
     QString resultatRequeteEnergie, resultatRequeteCourantEmission, resultatRequeteFocus, resultatRequeteWehnelt;
     QString resultatRequetePosX, resultatRequetePosY, resultatRequeteBalX, resultatRequeteBalY;
+    QString resultatCourant;
 
     // Envoi des commandes et réception des valeurs
     m_communication_SPECS->envoyer("EN ?");resultatRequeteEnergie = m_communication_SPECS->recevoir();
@@ -63,22 +64,35 @@ void ReleverMesure::actualisationMesuresSPECS()
     qDebug() << "Résultat balayage Y : " << resultatRequeteBalY;
     */
 
-    // Émission du signal avec les résultats obtenus
-    emit transmissionResultatSPECS(resultatRequeteEnergie, resultatRequeteCourantEmission,
-                                  resultatRequeteFocus, resultatRequeteWehnelt,
-                                  resultatRequetePosX, resultatRequetePosY,
-                                  resultatRequeteBalX, resultatRequeteBalY);
 
-    // Redémarre le timer pour maintenir la mise à jour périodique
+
+    /*
     float i = 0;
     while (i < 10) {
         m_communication_PICO->envoyer("READ?"); // seulement la valeur mesurée
-        QString valeur = m_communication_PICO->recevoirKeithley6485();
-        qDebug() << "📏 Courant mesuré : " << valeur;
+        resultatCourant = m_communication_PICO->recevoirKeithley6485();
+        qDebug() << "📏 Courant mesuré : " << resultatCourant;
 
         QThread::msleep(100); // Pause de 100 ms
         i++;
     }
+
+*/
+
+
+    m_communication_PICO->envoyer("READ?"); // seulement la valeur mesurée
+    resultatCourant = m_communication_PICO->recevoirKeithley6485();
+    qDebug() << "📏 Courant mesuré : " << resultatCourant;
+
+    QThread::msleep(100); // Pause de 100 ms
+
+    // Émission du signal avec les résultats obtenus
+    emit transmissionResultatSPECS(resultatRequeteEnergie, resultatRequeteCourantEmission,
+                                  resultatRequeteFocus, resultatRequeteWehnelt,
+                                  resultatRequetePosX, resultatRequetePosY,
+                                  resultatRequeteBalX, resultatRequeteBalY, resultatCourant);
+
+    // Redémarre le timer pour maintenir la mise à jour périodique
     this->start();
 }
 
