@@ -7,6 +7,7 @@
 #include <QCheckBox>
 #include "Classes/ControleInstrument/controleinstrument.h"
 
+
 // Constructeur
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -23,7 +24,28 @@ MainWindow::MainWindow(QWidget *parent)
     m_controleInstrument = new ControleInstrument(m_communication_SPECS, this);
 
     m_fenetreConnexion = new FenetreConnexion(this, m_communication_SPECS,m_communication_PICO);
-    m_releverMesure = new ReleverMesure(m_communication_SPECS, m_communication_PICO, this);
+
+
+
+
+
+
+    // Implématation d'un thread
+    m_releverMesure = new ReleverMesure(m_communication_SPECS, m_communication_PICO, nullptr);
+    // Création du thread de mesure
+    m_threadMesure = new QThread(this); // pour que le thread soit détruit automatiquement avec MainWindow
+    m_releverMesure->moveToThread(m_threadMesure);
+
+    // Démarre le timer de mesures lorsque le thread commence
+    connect(m_threadMesure, &QThread::started, m_releverMesure, &ReleverMesure::start);
+
+    // Ferme proprement le thread à la fermeture de MainWindow
+    connect(this, &MainWindow::destroyed, m_threadMesure, &QThread::quit);
+    connect(m_threadMesure, &QThread::finished, m_releverMesure, &QObject::deleteLater);
+    connect(m_threadMesure, &QThread::finished, m_threadMesure, &QObject::deleteLater);
+
+    // Démarre le thread
+    m_threadMesure->start();
 
     // Connexions : Signaux et Slots
     connect(m_fenetreConnexion, &FenetreConnexion::connexionEtablie,

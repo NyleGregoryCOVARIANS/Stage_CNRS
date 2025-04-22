@@ -5,7 +5,7 @@
 ReleverMesure::ReleverMesure(Communication *communicationSPECS, Communication *communicationPICO , QObject *parent)
     : QObject(parent), m_communication_SPECS(communicationSPECS), m_communication_PICO(communicationPICO)
 {
-    m_timer = new QTimer(this);
+    m_timer = nullptr;
     connect(m_timer, &QTimer::timeout, this, &ReleverMesure::actualisationMesuresSPECS);
 }
 
@@ -18,13 +18,21 @@ ReleverMesure::~ReleverMesure()
 // Lance le timer avec un intervalle de 5 secondes pour rafraîchir les mesures périodiquement
 void ReleverMesure::start()
 {
+    qDebug() << "🔁 [start()] Thread ID =" << QThread::currentThread();
+
+    if (!m_timer) {
+        m_timer = new QTimer(this);
+        connect(m_timer, &QTimer::timeout, this, &ReleverMesure::actualisationMesuresSPECS);
+    }
+
     if (!m_timer->isActive()) {
-        m_timer->start(5000);  // Lance uniquement si le timer est inactif
+        m_timer->start(5000);
         qDebug() << "Timer lancé.";
     } else {
         qDebug() << "Timer déjà actif, lancement ignoré.";
     }
 }
+
 
 // Stop le timer
 void ReleverMesure::stop()
@@ -36,6 +44,7 @@ void ReleverMesure::stop()
 // Envoie des requêtes pour récupérer les paramètres de l'alimentation, émet un signal contenant les valeurs reçues, puis démarre un timer pour répéter ce processus toutes les 5 secondes.
 void ReleverMesure::actualisationMesuresSPECS()
 {
+    qDebug() << "📡 [actualisationMesuresSPECS()] Thread ID =" << QThread::currentThread();
     qDebug() << "ACTUALISATION: Début de la mise à jour des mesures.";
 
     QString resultatRequeteEnergie, resultatRequeteCourantEmission, resultatRequeteFocus, resultatRequeteWehnelt;
@@ -84,16 +93,17 @@ void ReleverMesure::actualisationMesuresSPECS()
     resultatCourant = m_communication_PICO->recevoirKeithley6485();
     qDebug() << "📏 Courant mesuré : " << resultatCourant;
 
-    QThread::msleep(100); // Pause de 100 ms
-
     // Émission du signal avec les résultats obtenus
     emit transmissionResultatSPECS(resultatRequeteEnergie, resultatRequeteCourantEmission,
                                   resultatRequeteFocus, resultatRequeteWehnelt,
                                   resultatRequetePosX, resultatRequetePosY,
                                   resultatRequeteBalX, resultatRequeteBalY, resultatCourant);
 
+
     // Redémarre le timer pour maintenir la mise à jour périodique
     this->start();
+
+
 }
 
 

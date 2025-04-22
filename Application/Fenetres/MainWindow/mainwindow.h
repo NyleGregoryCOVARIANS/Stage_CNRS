@@ -41,6 +41,8 @@ private:
     QString CourantPico;
 
     ControleInstrument *m_controleInstrument;
+
+     QThread* m_threadMesure;
 };
 
 #endif // MAINWINDOW_H

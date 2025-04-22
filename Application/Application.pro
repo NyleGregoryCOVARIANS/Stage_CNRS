@@ -14,6 +14,7 @@ SOURCES += \
     Classes/Communication/communication.cpp \
     Classes/ControleInstrument/controleinstrument.cpp \
     Classes/ReleverMesure/relevermesure.cpp \
+    Classes/Worker/worker.cpp \
     Fenetres/Connexion/fenetreconnexion.cpp \
     main.cpp \
     Fenetres/MainWindow/mainwindow.cpp \
@@ -23,6 +24,7 @@ HEADERS += \
     Classes/Communication/communication.h \
     Classes/ControleInstrument/controleinstrument.h \
     Classes/ReleverMesure/relevermesure.h \
+    Classes/Worker/worker.h \
     Fenetres/Connexion/fenetreconnexion.h \
     Fenetres/MainWindow/mainwindow.h #\
 
