@@ -87,34 +87,36 @@ QString Communication::recevoir()
 // ==========================
 // Réception pour Keithley 6485
 // ==========================
-
 QString Communication::recevoirKeithley6485()
 {
     QByteArray reponseBrute;
 
-    // Étape 1 : attendre jusqu’à ce qu'on ait reçu une fin de ligne
     if (m_port->waitForReadyRead(2000)) {
-        // Boucle jusqu’à recevoir le caractère '\n' (fin de ligne)
         while (!reponseBrute.contains('\n')) {
             if (m_port->waitForReadyRead(100)) {
                 QByteArray chunk = m_port->readAll();
                 reponseBrute += chunk;
             } else {
-                break; // Timeout intermédiaire
+                break;
             }
         }
 
-        // Étape 2 : convertir en QString et nettoyer
         QString reponseCompleteString = QString(reponseBrute).trimmed();
 
+        // Regex pour capturer la valeur scientifique terminée par A (la mesure de courant)
+        QRegularExpression regex(R"(([+-]?\d+\.\d+E[+-]?\d+)A)");
+        QRegularExpressionMatch match = regex.match(reponseCompleteString);
 
-        QString courant = reponseCompleteString.section(',', 0, 0); // récupère uniquement la 1ère valeur
-
-        return courant;
+        if (match.hasMatch()) {
+            QString valeurCourant = match.captured(1); // Sans le A
+            return valeurCourant;
+        } else {
+            qDebug() << "❌ Aucune mesure de courant détectée dans :" << reponseCompleteString;
+            return "Erreur : Mesure non détectée";
+        }
     } else {
         qDebug() << "⛔ Aucune réponse reçue du Keithley.";
         return "Erreur : Pas de réponse";
     }
 }
-
 

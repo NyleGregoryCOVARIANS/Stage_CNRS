@@ -2,12 +2,10 @@ release/alimentation.o
 release/communication.o
 release/controleinstrument.o
 release/relevermesure.o
-release/worker.o
 release/fenetreconnexion.o
 release/main.o
 release/mainwindow.o
 release/moc_controleinstrument.o
 release/moc_relevermesure.o
-release/moc_worker.o
 release/moc_fenetreconnexion.o
 release/moc_mainwindow.o

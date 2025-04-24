@@ -1,0 +1,26 @@
+#include "workerreleve.h"
+#include <QDebug>
+
+WorkerReleve::WorkerReleve(Communication* comSpecs, Communication* comPico)
+    : m_comSpecs(comSpecs), m_comPico(comPico) {}
+
+void WorkerReleve::effectuerReleve()
+{
+    qDebug() << "🛠️ [WorkerReleve::effectuerReleve()] Thread =" << QThread::currentThread();
+
+    QString en_r, ec_r, f1_r, we_r, x0_r, y0_r, wx_r, wy_r;
+
+    m_comSpecs->envoyer("EN ?"); en_r = m_comSpecs->recevoir();
+    m_comSpecs->envoyer("EC ?"); ec_r = m_comSpecs->recevoir();
+    m_comSpecs->envoyer("F1 ?"); f1_r = m_comSpecs->recevoir();
+    m_comSpecs->envoyer("WE ?"); we_r = m_comSpecs->recevoir();
+    m_comSpecs->envoyer("X0 ?"); x0_r = m_comSpecs->recevoir();
+    m_comSpecs->envoyer("Y0 ?"); y0_r = m_comSpecs->recevoir();
+    m_comSpecs->envoyer("WX ?"); wx_r = m_comSpecs->recevoir();
+    m_comSpecs->envoyer("WY ?"); wy_r = m_comSpecs->recevoir();
+
+    m_comPico->envoyer("READ?");
+    QString courant = m_comPico->recevoirKeithley6485();
+
+    emit mesureTerminee(en_r, ec_r, f1_r, we_r, x0_r, y0_r, wx_r, wy_r, courant);
+}

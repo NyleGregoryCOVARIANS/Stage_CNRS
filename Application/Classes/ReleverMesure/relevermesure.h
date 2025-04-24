@@ -13,7 +13,7 @@ public:
     explicit ReleverMesure(Communication *m_communication_SPECS, Communication *m_communication_PICO, QObject *parent = nullptr);
     ~ReleverMesure();
 
-    void start();
+    Q_INVOKABLE void start();
     void stop();
 
 signals:

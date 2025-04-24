@@ -6,7 +6,6 @@ ReleverMesure::ReleverMesure(Communication *communicationSPECS, Communication *c
     : QObject(parent), m_communication_SPECS(communicationSPECS), m_communication_PICO(communicationPICO)
 {
     m_timer = nullptr;
-    connect(m_timer, &QTimer::timeout, this, &ReleverMesure::actualisationMesuresSPECS);
 }
 
 // Destructeur
@@ -26,7 +25,7 @@ void ReleverMesure::start()
     }
 
     if (!m_timer->isActive()) {
-        m_timer->start(5000);
+        m_timer->start(2000);
         qDebug() << "Timer lancé.";
     } else {
         qDebug() << "Timer déjà actif, lancement ignoré.";
@@ -44,7 +43,7 @@ void ReleverMesure::stop()
 // Envoie des requêtes pour récupérer les paramètres de l'alimentation, émet un signal contenant les valeurs reçues, puis démarre un timer pour répéter ce processus toutes les 5 secondes.
 void ReleverMesure::actualisationMesuresSPECS()
 {
-    qDebug() << "📡 [actualisationMesuresSPECS()] Thread ID =" << QThread::currentThread();
+    qDebug() << "[actualisationMesuresSPECS()] Thread ID =" << QThread::currentThread();
     qDebug() << "ACTUALISATION: Début de la mise à jour des mesures.";
 
     QString resultatRequeteEnergie, resultatRequeteCourantEmission, resultatRequeteFocus, resultatRequeteWehnelt;
@@ -61,37 +60,42 @@ void ReleverMesure::actualisationMesuresSPECS()
     m_communication_SPECS->envoyer("WX ?");resultatRequeteBalX = m_communication_SPECS->recevoir();
     m_communication_SPECS->envoyer("WY ?"); resultatRequeteBalY = m_communication_SPECS->recevoir();
 
-    /*
-    // Affichage des résultats dans le débogage pour toutes les valeurs
-    qDebug() << "Résultat énergie : " << resultatRequeteEnergie;
-    qDebug() << "Résultat courant émission : " << resultatRequeteCourantEmission;
-    qDebug() << "Résultat focus : " << resultatRequeteFocus;
-    qDebug() << "Résultat Wehnelt : " << resultatRequeteWehnelt;
-    qDebug() << "Résultat position X : " << resultatRequetePosX;
-    qDebug() << "Résultat position Y : " << resultatRequetePosY;
-    qDebug() << "Résultat balayage X : " << resultatRequeteBalX;
-    qDebug() << "Résultat balayage Y : " << resultatRequeteBalY;
-    */
-
-
-
-    /*
-    float i = 0;
-    while (i < 10) {
-        m_communication_PICO->envoyer("READ?"); // seulement la valeur mesurée
-        resultatCourant = m_communication_PICO->recevoirKeithley6485();
-        qDebug() << "📏 Courant mesuré : " << resultatCourant;
-
-        QThread::msleep(100); // Pause de 100 ms
-        i++;
-    }
-
-*/
-
 
     m_communication_PICO->envoyer("READ?"); // seulement la valeur mesurée
+
+
+
     resultatCourant = m_communication_PICO->recevoirKeithley6485();
-    qDebug() << "📏 Courant mesuré : " << resultatCourant;
+
+
+    qDebug() << "Courant mesuré : " << resultatCourant;
+
+ /*
+    QChar targetChar = 'A';
+    int index = resultatCourant.indexOf(targetChar);
+    if (index != -1) {
+        resultatCourant.truncate(index);}
+
+
+
+    // Effectuer la mesure
+    m_communication->envoyer("READ?");
+
+    //On reçoit la valeur
+    qvCourant[0] = m_communication->recevoirKeithley6485();
+
+    //Permet de virer l'unité "A" et les 2 autres valeurs données après le courant
+    QChar targetChar = 'A';
+    int index = qvCourant[0].indexOf(targetChar);
+    if (index != -1) {
+        qvCourant[0].truncate(index);}
+
+    emit mesureLue(qvCourant);
+
+    return qvCourant;
+}
+    */
+
 
     // Émission du signal avec les résultats obtenus
     emit transmissionResultatSPECS(resultatRequeteEnergie, resultatRequeteCourantEmission,
@@ -99,11 +103,7 @@ void ReleverMesure::actualisationMesuresSPECS()
                                   resultatRequetePosX, resultatRequetePosY,
                                   resultatRequeteBalX, resultatRequeteBalY, resultatCourant);
 
-
-    // Redémarre le timer pour maintenir la mise à jour périodique
-    this->start();
-
-
 }
+
 
 

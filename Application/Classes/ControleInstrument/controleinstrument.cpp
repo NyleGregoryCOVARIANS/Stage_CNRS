@@ -7,6 +7,17 @@ ControleInstrument::ControleInstrument(Communication* communicationSPECS, QObjec
 
 }
 
+void ControleInstrument::attenteAsynchrone(int millisecondes)
+{
+    QEventLoop loop;
+    QTimer::singleShot(millisecondes, &loop, SLOT(quit()));
+    loop.exec();
+}
+
+
+
+
+
 void ControleInstrument::validate_button_clickedSPECS(const QString& energie,
                                             const QString& courantEmission,
                                             const QString& focus,
@@ -70,28 +81,43 @@ void ControleInstrument::validate_button_clickedSPECS(const QString& energie,
     qDebug() << "Alimentation SPECS mise à jour";
 }
 
-void ControleInstrument::validate_button_clickedPICO(        const QString& EnergieMin,
-                                                const QString& EnergieMax,
-                                                const QString& Pas,
-                                                const QString& Duree) {
-    if (!EnergieMin.isEmpty()) {
-        qDebug() << "EnergieMin : " << EnergieMin;
+void ControleInstrument::validate_button_clickedPICO(
+    const QString& EnergieMin,
+    const QString& EnergieMax,
+    const QString& Pas,
+    const QString& Duree)
+{
+    if (EnergieMin.isEmpty() || EnergieMax.isEmpty() || Pas.isEmpty() || Duree.isEmpty()) {
+        qDebug() << "Tous les champs doivent être remplis.";
+        return;
     }
 
-    if (!EnergieMax.isEmpty()) {
-        qDebug() << "EnergieMax : " << EnergieMax;
-    }
+    double eMin = EnergieMin.toDouble();
+    double eMax = EnergieMax.toDouble();
+    double pas = Pas.toDouble();
+    int duree = Duree.toInt(); // en secondes
 
-    if (!Pas.isEmpty()) {
-        qDebug() << "Pas : " << Pas;
-    }
+    qDebug() << "EnergieMin :" << eMin;
+    qDebug() << "EnergieMax :" << eMax;
+    qDebug() << "Pas :" << pas;
+    qDebug() << "Duree :" << duree;
 
-    if (!Duree.isEmpty()) {
-        qDebug() << "Duree : " << Duree;
-    }
+    for (double energie = eMin; energie <= eMax; energie += pas) {
 
-    qDebug() << "Alimentation PICO mise à jour";
+        int i = 0;
+        while(i < 10){
+            m_communicationSPECS->envoyer("READ?");
+            qDebug() << "Energie appliquée :" << energie;
+
+            i++;
+        }
+
+
+        attenteAsynchrone(5000);  // ← 5 secondes
+
+    }
 }
+
 
 
 // Active le mode Operate quand la case est cochée.

@@ -26,7 +26,6 @@ public:
         const QString& BalayageY
         );
 
-
     void validate_button_clickedPICO(
         const QString& EnergieMin,
         const QString& EnergieMax,
@@ -38,6 +37,8 @@ public:
     void on_checkBoxHV_toggled(bool checked);
     void on_checkBoxOperate_toggled(bool checked);
 
+private slots:
+    void attenteAsynchrone(int millisecondes);
 
 private:
     Communication* m_communicationSPECS;
