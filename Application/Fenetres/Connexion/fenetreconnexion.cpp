@@ -12,6 +12,7 @@ FenetreConnexion::FenetreConnexion(QWidget *parent)
     m_ui->setupUi(this);
     m_communication_SPECS = new Communication();
     m_communication_PICO = new Communication();
+    m_controleInstrument = new ControleInstrument(m_communication_SPECS, m_communication_PICO, this);
 }
 
 FenetreConnexion::FenetreConnexion(QWidget *parent, Communication *m_communicationSPECS, Communication *m_communicationPICO)
@@ -21,6 +22,7 @@ FenetreConnexion::FenetreConnexion(QWidget *parent, Communication *m_communicati
     m_ui->setupUi(this);
     m_communication_SPECS = m_communicationSPECS;
     m_communication_PICO = m_communicationPICO;
+    m_controleInstrument = new ControleInstrument(m_communication_SPECS, m_communication_PICO, this);
 }
 
 

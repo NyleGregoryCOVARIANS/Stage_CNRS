@@ -10,7 +10,7 @@ class ControleInstrument : public QObject
     Q_OBJECT
 
 public:
-    explicit ControleInstrument(Communication* communicationSPECS, QObject *parent = nullptr);
+    explicit ControleInstrument(Communication* communicationSPECS, Communication* communicationPICO, QObject *parent = nullptr);
 
     void initialisationSPECS(Communication *m_communicationSPECS);
     void initialisationPICO(Communication *m_communicationPICO);

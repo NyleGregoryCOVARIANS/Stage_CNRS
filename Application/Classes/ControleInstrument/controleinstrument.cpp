@@ -1,20 +1,28 @@
 #include "controleinstrument.h"
 #include <QDebug>
 
-ControleInstrument::ControleInstrument(Communication* communicationSPECS, QObject *parent)
-    : QObject(parent), m_communicationSPECS(communicationSPECS)
+ControleInstrument::ControleInstrument(Communication* communicationSPECS,
+                                       Communication* communicationPICO,
+                                       QObject *parent)
+    : QObject(parent),
+    m_communicationSPECS(communicationSPECS),
+    m_communicationPICO(communicationPICO)
 {
-
 }
+
 
 void ControleInstrument::attenteAsynchrone(int millisecondes)
 {
-    QEventLoop loop;
-    QTimer::singleShot(millisecondes, &loop, SLOT(quit()));
-    loop.exec();
+    if (QThread::currentThread() != qApp->thread()) {
+        // Si on est dans un thread secondaire
+        QThread::msleep(millisecondes);
+    } else {
+        // Si on est dans le thread principal (GUI)
+        QEventLoop loop;
+        QTimer::singleShot(millisecondes, &loop, SLOT(quit()));
+        loop.exec();
+    }
 }
-
-
 
 
 
@@ -82,11 +90,17 @@ void ControleInstrument::validate_button_clickedSPECS(const QString& energie,
 }
 
 void ControleInstrument::validate_button_clickedPICO(
+
     const QString& EnergieMin,
     const QString& EnergieMax,
     const QString& Pas,
     const QString& Duree)
 {
+
+
+    qDebug() << "[BALAYAGE] Thread ID =" << QThread::currentThread();
+
+
     if (EnergieMin.isEmpty() || EnergieMax.isEmpty() || Pas.isEmpty() || Duree.isEmpty()) {
         qDebug() << "Tous les champs doivent être remplis.";
         return;
@@ -102,21 +116,62 @@ void ControleInstrument::validate_button_clickedPICO(
     qDebug() << "Pas :" << pas;
     qDebug() << "Duree :" << duree;
 
-    for (double energie = eMin; energie <= eMax; energie += pas) {
-
-        int i = 0;
-        while(i < 10){
-            m_communicationSPECS->envoyer("READ?");
-            qDebug() << "Energie appliquée :" << energie;
-
-            i++;
-        }
 
 
-        attenteAsynchrone(5000);  // ← 5 secondes
-
+    int i = 0;
+    while(i < 10){
+        m_communicationPICO->envoyer("READ?");
+        qDebug() <<"AAAAAAAAAAAAAAAAAAAAAAAAAAA" << m_communicationPICO->recevoirKeithley6485();
+        attenteAsynchrone(3000);
+        i++;
     }
+
+
+
+    /*
+        for (double energie = eMin; energie <= eMax; energie += pas) {
+            m_communicationSPECS->envoyer("EN " + QString::number(energie));
+            qDebug() << "Energie appliquée :" << energie;
+            attenteAsynchrone(5000);  // ← 5 secondes
+
+
+            qDebug() << m_communicationPICO->obtenirPort();
+            if (!m_communicationPICO) {
+                qDebug() << "❌ m_communicationPICO est null !";
+                return;
+            }
+
+
+
+
+            m_communicationPICO->envoyer("READ?");
+            qDebug() <<"AAAAAAAAAAAAAAAAAAAAAAAAAAA : " << m_communicationPICO->recevoirKeithley6485();
+
+
+
+
+
+            int i = 0;
+            while(i < 10){
+                m_communicationPICO->envoyer("READ?");
+                qDebug() <<"Intensité mesuré : " << m_communicationPICO->recevoirKeithley6485();
+                attenteAsynchrone(1000);
+                i++;
+            }
+            */
+
+
+
+
+
+
+
+
+
+            //m_communicationPICO->envoyer("READ?");
+            //m_communicationSPECS->envoyer("EN ?");
 }
+
 
 
 
@@ -147,34 +202,37 @@ void ControleInstrument::on_checkBoxHV_toggled(bool checked)
 }
 
 
-void ControleInstrument::initialisationPICO(Communication *m_communicationPICO){
-        qDebug() << "--------------OPERATION PICO-----------------";
+void ControleInstrument::initialisationPICO(Communication *communicationPICO)
+{
 
-        // Réinitialisation de l'appareil
-        m_communicationPICO->envoyer("*RST");
+    if (this != nullptr) {
+        qDebug() << "this = " << this;
+    }
 
-        // Activer le Zero Check
-        m_communicationPICO->envoyer("SYST:ZCH ON");
+    qDebug() << "communicationPICO = " << communicationPICO;
 
-        // Plage fixe
-        m_communicationPICO->envoyer("CURR:RANG:AUTO ON");
+    if (!communicationPICO) {
+        qDebug() << "❌ ERREUR : communicationPICO est nullptr";
+    }
+    qDebug() << "Port : " << communicationPICO->obtenirPort();
 
-        // Initier la mesure pour capter l'offset
-        m_communicationPICO->envoyer("INIT");
+    m_communicationPICO = communicationPICO;
 
-        // Acquisition de la correction de zéro
-        m_communicationPICO->envoyer("SYST:ZCOR:ACQ");
+    qDebug() << "--------------OPERATION PICO-----------------";
+    m_communicationPICO->envoyer("*RST");
+    m_communicationPICO->envoyer("SYST:ZCH ON");
+    m_communicationPICO->envoyer("CURR:RANG:AUTO ON");
+    m_communicationPICO->envoyer("INIT");
+    m_communicationPICO->envoyer("SYST:ZCOR:ACQ");
+    m_communicationPICO->envoyer("SYST:ZCOR ON");
+    m_communicationPICO->envoyer("CURR:RANG:AUTO ON");
+    m_communicationPICO->envoyer("SYST:ZCH OFF");
 
-        // Activer la correction de zéro
-        m_communicationPICO->envoyer("SYST:ZCOR ON");
 
-        // Remettre en auto-range
-        m_communicationPICO->envoyer("CURR:RANG:AUTO ON");
-
-        // Désactiver le Zero Check
-        m_communicationPICO->envoyer("SYST:ZCH OFF");
+    m_communicationPICO->envoyer("CURR:NPLC 0.01");
 
 }
+
 
 void ControleInstrument::initialisationSPECS(Communication *m_communicationSPECS){
     qDebug() << "Activation du mode REMOTE";

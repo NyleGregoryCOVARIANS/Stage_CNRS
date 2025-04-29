@@ -14,6 +14,7 @@ public:
     ~ReleverMesure();
 
     Q_INVOKABLE void start();
+    Q_INVOKABLE void restart();
     void stop();
 
 signals:

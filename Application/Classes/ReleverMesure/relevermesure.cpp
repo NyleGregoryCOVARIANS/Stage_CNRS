@@ -25,12 +25,32 @@ void ReleverMesure::start()
     }
 
     if (!m_timer->isActive()) {
-        m_timer->start(2000);
+        m_timer->start(3000);
         qDebug() << "Timer lancé.";
     } else {
         qDebug() << "Timer déjà actif, lancement ignoré.";
     }
 }
+
+void ReleverMesure::restart()
+{
+    qDebug() << "🔄 Restart demandé.";
+
+    if (m_timer) {
+        if (m_timer->isActive()) {
+            qDebug() << "🛑 Timer actif, arrêt...";
+            m_timer->stop();
+        }
+        qDebug() << "▶️ Redémarrage du timer.";
+        m_timer->start(3000);
+    } else {
+        qDebug() << "❌ Timer inexistant, création.";
+        m_timer = new QTimer(this);
+        connect(m_timer, &QTimer::timeout, this, &ReleverMesure::actualisationMesuresSPECS);
+        m_timer->start(2000);
+    }
+}
+
 
 
 // Stop le timer
@@ -61,47 +81,21 @@ void ReleverMesure::actualisationMesuresSPECS()
     m_communication_SPECS->envoyer("WY ?"); resultatRequeteBalY = m_communication_SPECS->recevoir();
 
 
-    m_communication_PICO->envoyer("READ?"); // seulement la valeur mesurée
 
 
-
-    resultatCourant = m_communication_PICO->recevoirKeithley6485();
-
-
-    qDebug() << "Courant mesuré : " << resultatCourant;
-
- /*
-    QChar targetChar = 'A';
-    int index = resultatCourant.indexOf(targetChar);
-    if (index != -1) {
-        resultatCourant.truncate(index);}
+    // Quand on fait une mesure depuis
+//    m_communication_PICO->envoyer("READ?"); // seulement la valeur mesurée
+//    resultatCourant = m_communication_PICO->recevoirKeithley6485();
+ //   qDebug() << "Courant mesuré : " << resultatCourant;
 
 
-
-    // Effectuer la mesure
-    m_communication->envoyer("READ?");
-
-    //On reçoit la valeur
-    qvCourant[0] = m_communication->recevoirKeithley6485();
-
-    //Permet de virer l'unité "A" et les 2 autres valeurs données après le courant
-    QChar targetChar = 'A';
-    int index = qvCourant[0].indexOf(targetChar);
-    if (index != -1) {
-        qvCourant[0].truncate(index);}
-
-    emit mesureLue(qvCourant);
-
-    return qvCourant;
-}
-    */
 
 
     // Émission du signal avec les résultats obtenus
     emit transmissionResultatSPECS(resultatRequeteEnergie, resultatRequeteCourantEmission,
                                   resultatRequeteFocus, resultatRequeteWehnelt,
                                   resultatRequetePosX, resultatRequetePosY,
-                                  resultatRequeteBalX, resultatRequeteBalY, resultatCourant);
+                                  resultatRequeteBalX, resultatRequeteBalY, resultatCourant = "");
 
 }
 

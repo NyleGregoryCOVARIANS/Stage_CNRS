@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_communication_SPECS = new Communication();
     m_communication_PICO = new Communication();
 
-    m_controleInstrument = new ControleInstrument(m_communication_SPECS, this);
+    m_controleInstrument = new ControleInstrument(m_communication_SPECS, m_communication_PICO, nullptr);
 
     m_fenetreConnexion = new FenetreConnexion(this, m_communication_SPECS,m_communication_PICO);
 
@@ -47,8 +47,10 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     // Connexions : Signaux et Slots
+    /*
     connect(m_fenetreConnexion, &FenetreConnexion::connexionEtablie,
             m_releverMesure, &ReleverMesure::actualisationMesuresSPECS); // Dès que l'utilisateur se connecte, on relève une mesure.
+    */
 
     connect(m_releverMesure, &ReleverMesure::transmissionResultatSPECS,
             this, &MainWindow::affichageResultatRecuSPECS); // Dès qu'une mesure est réalisée, on affiche les paramètres correspondants dans l'interface.

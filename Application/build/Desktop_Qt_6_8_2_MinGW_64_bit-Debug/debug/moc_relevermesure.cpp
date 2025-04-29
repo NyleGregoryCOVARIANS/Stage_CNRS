@@ -50,7 +50,8 @@ static constexpr auto qt_meta_stringdata_ZN13ReleverMesureE = QtMocHelpers::stri
     "CurrentBalY",
     "CurrentCourant",
     "actualisationMesuresSPECS",
-    "start"
+    "start",
+    "restart"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -62,7 +63,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN13ReleverMesureE[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -70,13 +71,14 @@ Q_CONSTINIT static const uint qt_meta_data_ZN13ReleverMesureE[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    9,   32,    2, 0x06,    1 /* Public */,
+       1,    9,   38,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-      12,    0,   51,    2, 0x0a,   11 /* Public */,
+      12,    0,   57,    2, 0x0a,   11 /* Public */,
 
  // methods: name, argc, parameters, tag, flags, initial metatype offsets
-      13,    0,   52,    2, 0x02,   12 /* Public */,
+      13,    0,   58,    2, 0x02,   12 /* Public */,
+      14,    0,   59,    2, 0x02,   13 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::QString,    3,    4,    5,    6,    7,    8,    9,   10,   11,
@@ -85,6 +87,7 @@ Q_CONSTINIT static const uint qt_meta_data_ZN13ReleverMesureE[] = {
     QMetaType::Void,
 
  // methods: parameters
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -113,6 +116,8 @@ Q_CONSTINIT const QMetaObject ReleverMesure::staticMetaObject = { {
         // method 'actualisationMesuresSPECS'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'start'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'restart'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -126,6 +131,7 @@ void ReleverMesure::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 0: _t->transmissionResultatSPECS((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[4])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[5])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[6])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[7])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[8])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[9]))); break;
         case 1: _t->actualisationMesuresSPECS(); break;
         case 2: _t->start(); break;
+        case 3: _t->restart(); break;
         default: ;
         }
     }
@@ -160,14 +166,14 @@ int ReleverMesure::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }
