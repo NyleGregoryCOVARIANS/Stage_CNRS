@@ -53,16 +53,12 @@ void FenetreConnexion::on_pushButton_rs232_clicked()
     if (estConnecteSPECS) {
         m_controleInstrument->initialisationPICO(m_communication_PICO);
         m_controleInstrument->initialisationSPECS(m_communication_SPECS);
-        emit connexionEtablie(); // Envoie le signal que la connexion a réussis à MainWindow
+        //emit connexionEtablie(); // Envoie le signal que la connexion a réussis à MainWindow
 
     }
     else{
         qDebug() << "Echec de connection SPECS";
     }
-
-
-
-
 
     this->hide();
 }

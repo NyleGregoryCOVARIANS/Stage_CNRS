@@ -84,8 +84,8 @@ void ReleverMesure::actualisationMesuresSPECS()
 
 
     // Quand on fait une mesure depuis
-//    m_communication_PICO->envoyer("READ?"); // seulement la valeur mesurée
-//    resultatCourant = m_communication_PICO->recevoirKeithley6485();
+    //m_communication_PICO->envoyer("READ?"); // seulement la valeur mesurée
+    //resultatCourant = m_communication_PICO->recevoirKeithley6485();
  //   qDebug() << "Courant mesuré : " << resultatCourant;
 
 

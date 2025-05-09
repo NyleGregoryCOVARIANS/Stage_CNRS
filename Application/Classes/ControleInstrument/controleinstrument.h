@@ -34,6 +34,8 @@ public:
         );
 
 
+    void changerPolarisation();
+
     void on_checkBoxHV_toggled(bool checked);
     void on_checkBoxOperate_toggled(bool checked);
 
@@ -43,6 +45,7 @@ private slots:
 private:
     Communication* m_communicationSPECS;
     Communication* m_communicationPICO;
+    QString polarisation = "+50V";
 
 
 };
