@@ -178,12 +178,13 @@ public:
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">LPT2</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">...</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px"
-                        "; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+                        "; -qt-block-indent:0; text-indent:0px;\">Astuce : Pour trouver les valeurs des ports, aller dans Gestionnaire de p\303\251riph\303\251riques, puis dans COM.<br /></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">Les valeurs possibles du port s\303\251rie en mode Linux sont :</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">/dev/ttyS0</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">/dev/ttyS1</span></p>\n"
 "<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">/dev/ttyS2</span></p>\n"
-"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">...</span></p></body></html>"));
+"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-"
+                        "right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:10pt;\">...</span></p></body></html>"));
 
         gridLayout->addWidget(textEdit, 4, 0, 1, 1);
 
@@ -196,7 +197,7 @@ public:
     void retranslateUi(QDialog *FenetreConnexion)
     {
         FenetreConnexion->setWindowTitle(QCoreApplication::translate("FenetreConnexion", "Configuration RS232", nullptr));
-        lineEditSPECS->setText(QCoreApplication::translate("FenetreConnexion", "COM17", nullptr));
+        lineEditSPECS->setText(QCoreApplication::translate("FenetreConnexion", "COM19", nullptr));
         comboBoxSPECS->setItemText(0, QCoreApplication::translate("FenetreConnexion", "1200", nullptr));
         comboBoxSPECS->setItemText(1, QCoreApplication::translate("FenetreConnexion", "2400", nullptr));
         comboBoxSPECS->setItemText(2, QCoreApplication::translate("FenetreConnexion", "4800", nullptr));
@@ -205,7 +206,7 @@ public:
         label_2->setText(QCoreApplication::translate("FenetreConnexion", "Port s\303\251rie SPECS", nullptr));
         label_3->setText(QCoreApplication::translate("FenetreConnexion", "Baud rate SPECS", nullptr));
         pushButton_rs232->setText(QCoreApplication::translate("FenetreConnexion", "Sauver et fermer la fen\303\252tre", nullptr));
-        lineEditPICO->setText(QCoreApplication::translate("FenetreConnexion", "COM18", nullptr));
+        lineEditPICO->setText(QCoreApplication::translate("FenetreConnexion", "COM20", nullptr));
         comboBoxPICO->setItemText(0, QCoreApplication::translate("FenetreConnexion", "9600", nullptr));
         comboBoxPICO->setItemText(1, QCoreApplication::translate("FenetreConnexion", "4800", nullptr));
         comboBoxPICO->setItemText(2, QCoreApplication::translate("FenetreConnexion", "2400", nullptr));

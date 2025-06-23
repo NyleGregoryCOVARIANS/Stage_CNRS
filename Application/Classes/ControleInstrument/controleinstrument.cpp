@@ -114,18 +114,14 @@ void ControleInstrument::validate_button_clickedPICO(
     const QString& Duree)
 {
     QMap<double, QVector<double>> mesuresParEnergie;
+    QStringList tableau1Lignes;
+    QMap<double, QMap<QString, double>> moyennes;
 
-    if (polarisation == "+50V") {
-        // Afficher un message pour avertir l’utilisateur avant le 1er balayage
-        QMessageBox::information(nullptr, "Polarisation requise",
-                                 QString("Merci de bien vouloir polariser à %1 avant de commencer.").arg(polarisation));
-    }
-
+    // Validation des entrées
     if (EnergieMin.isEmpty() || EnergieMax.isEmpty() || Pas.isEmpty() || Duree.isEmpty()) {
         qDebug() << "Tous les champs doivent être remplis.";
         return;
     }
-
     if (!m_communicationPICO) {
         qDebug() << "❌ m_communicationPICO est null !";
         return;
@@ -136,214 +132,118 @@ void ControleInstrument::validate_button_clickedPICO(
     double pas = Pas.toDouble();
     int duree = Duree.toInt();
 
-    // Structures pour stocker les données des deux tableaux
-    QStringList tableau1Lignes; // Pour le tableau des mesures brutes
-    QMap<double, QMap<QString, double>> moyennes; // Pour le tableau des moyennes
-
-    // Premier balayage
-    for (double energie = eMin; energie <= eMax; energie += pas) {
-        m_communicationSPECS->envoyer("EN " + QString::number(energie));
-        qDebug() << "Energie appliquée :" << energie;
-
-        attenteAsynchrone(5000);
-
-        QElapsedTimer timer;
-        timer.start();
-
-        while (timer.elapsed() < duree * 1000) {
-            m_communicationPICO->envoyer("READ?");
-            QString intensite = m_communicationPICO->recevoirKeithley6485();
-
-            bool ok;
-            double intensiteNum = intensite.trimmed().toDouble(&ok);
-            if (ok) {
-                mesuresParEnergie[energie].append(intensiteNum);
-            }
-
-            QString timestamp = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
-            double tempsEcoule = timer.elapsed() / 1000.0;
-
-            // Ajouter la ligne au tableau 1
-            QString ligne = QString("%1;%2;%3;%4;%5")
-                                .arg(timestamp)
-                                .arg(QString::number(tempsEcoule, 'f', 2))
-                                .arg(QString::number(energie, 'f', 2))
-                                .arg(polarisation)
-                                .arg(intensite.trimmed());
-            tableau1Lignes.append(ligne);
-
-            qDebug() << "⏱ Mesure :" << timestamp << " | " << tempsEcoule << "s | "
-                     << energie << "eV | " << polarisation << " | " << intensite;
-        }
-
-        // Calculer la moyenne pour cette énergie
-        const QVector<double>& valeurs = mesuresParEnergie[energie];
-        double somme = std::accumulate(valeurs.begin(), valeurs.end(), 0.0);
-        double moyenne = valeurs.isEmpty() ? 0.0 : somme / valeurs.size();
-        moyennes[energie][polarisation] = moyenne;
-    }
-
-    // Écriture dans le fichier pour le premier balayage
     QFile fichier("C:/Users/Mesure/Documents/Nyle/mesures_pico.csv");
     if (!fichier.open(QIODevice::ReadWrite | QIODevice::Text)) {
         qDebug() << "❌ Impossible d'ouvrir le fichier.";
         return;
     }
-
     QTextStream out(&fichier);
-    QStringList lignesExistantes = out.readAll().split('\n');
-    fichier.seek(0); // Retour au début pour écrire
 
-    // Si le fichier est vide, écrire les en-têtes
+    // Écrire les en-têtes si le fichier est vide
     if (fichier.size() == 0) {
-        out << "Date et heure;Temps ecoule (s);Energie (eV);Polarisation;Intensite brute;;" // Tableau 1
-            << "Energie (eV);Intensite moyenne (+50V);Intensite moyenne (-50V);SEY\n"; // Tableau 2 avec Energie (eV)
+        out << "Date et heure;Temps ecoule (s);Energie (eV);Polarisation;Intensite brute;;"
+            << "Energie (eV);Intensite moyenne (+50V);Intensite moyenne (-50V);SEY\n";
     }
-
-    // Aller à la fin pour ajouter les nouvelles données
     fichier.seek(fichier.size());
 
-    // Écrire les données du tableau 1 et du tableau 2 côte à côte pour le premier balayage
-    int maxLignes = tableau1Lignes.size();
-    QStringList tableau2Lignes;
-
-    // Générer les lignes du tableau 2 pour le premier balayage
-    for (auto it = moyennes.begin(); it != moyennes.end(); ++it) {
-        double energie = it.key();
-        double imPlus = it.value().value("+50V", std::numeric_limits<double>::quiet_NaN());
-        double imMoins = it.value().value("-50V", std::numeric_limits<double>::quiet_NaN());
-        QString sey;
-
-        if (!std::isnan(imPlus) && !std::isnan(imMoins) && imPlus != 0) {
-            double seyVal = 1 - (imMoins / imPlus);
-            sey = QString::number(seyVal, 'f', 6);
+    // Fonction interne pour effectuer un balayage
+    auto performBalayage = [&]() {
+        if (polarisation == "+50V") {
+            QMessageBox::information(nullptr, "Polarisation requise",
+                                     QString("Merci de bien vouloir polariser à %1 avant de commencer.").arg(polarisation));
         }
 
-        // Générer la ligne avec Energie (eV) inclus
-        QString ligne = QString("%1;%2;%3;%4")
-                            .arg(QString::number(energie, 'f', 2))
-                            .arg(std::isnan(imPlus) ? "" : QString::number(imPlus, 'e', 10))
-                            .arg(std::isnan(imMoins) ? "" : QString::number(imMoins, 'e', 10))
-                            .arg(sey);
-        tableau2Lignes.append(ligne);
-    }
+        for (double energie = eMin; energie <= eMax; energie += pas) {
+            m_communicationSPECS->envoyer("EN " + QString::number(energie));
+            qDebug() << "Energie appliquée :" << energie;
+            attenteAsynchrone(5000);
 
-    // Écrire les lignes des deux tableaux côte à côte pour le premier balayage
-    for (int i = 0; i < maxLignes; ++i) {
-        QString ligneTableau1 = tableau1Lignes.value(i, ";;;;");
-        QString ligneTableau2 = (i < tableau2Lignes.size()) ? tableau2Lignes[i] : ";;;";
-        out << ligneTableau1 << ";;" << ligneTableau2 << "\n";
-    }
+            QElapsedTimer timer;
+            timer.start();
 
-    // Ajouter les lignes restantes du tableau 2 si nécessaire
-    for (int i = maxLignes; i < tableau2Lignes.size(); ++i) {
-        out << ";;;;;;" << tableau2Lignes[i] << "\n";
-    }
+            while (timer.elapsed() < duree * 1000) {
+                m_communicationPICO->envoyer("READ?");
+                QString intensite = m_communicationPICO->recevoirKeithley6485();
+                bool ok;
+                double intensiteNum = intensite.trimmed().toDouble(&ok);
 
-    fichier.flush();
+                if (ok) {
+                    mesuresParEnergie[energie].append(intensiteNum);
+                }
 
-    // Afficher un message avant le 2ème balayage si nécessaire
+                QString timestamp = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+                double tempsEcoule = timer.elapsed() / 1000.0;
+
+                QString ligne = QString("%1;%2;%3;%4;%5")
+                                    .arg(timestamp)
+                                    .arg(QString::number(tempsEcoule, 'f', 2))
+                                    .arg(QString::number(energie, 'f', 2))
+                                    .arg(polarisation)
+                                    .arg(intensite.trimmed());
+                tableau1Lignes.append(ligne);
+
+                qDebug() << "⏱ Mesure :" << timestamp << " | " << tempsEcoule << "s | "
+                         << energie << "eV | " << polarisation << " | " << intensite;
+            }
+
+            const QVector<double>& valeurs = mesuresParEnergie[energie];
+            double somme = std::accumulate(valeurs.begin(), valeurs.end(), 0.0);
+            double moyenne = valeurs.isEmpty() ? 0.0 : somme / valeurs.size();
+            moyennes[energie][polarisation] = moyenne;
+        }
+
+        QStringList tableau2Lignes;
+        for (auto it = moyennes.begin(); it != moyennes.end(); ++it) {
+            double energie = it.key();
+            double imPlus = it.value().value("+50V", std::numeric_limits<double>::quiet_NaN());
+            double imMoins = it.value().value("-50V", std::numeric_limits<double>::quiet_NaN());
+            QString sey;
+
+            if (!std::isnan(imPlus) && !std::isnan(imMoins) && imPlus != 0) {
+                double seyVal = 1 - (imMoins / imPlus);
+                sey = QString::number(seyVal, 'f', 6);
+            }
+
+            QString ligne = QString("%1;%2;%3;%4")
+                                .arg(QString::number(energie, 'f', 2))
+                                .arg(std::isnan(imPlus) ? "" : QString::number(imPlus, 'e', 10))
+                                .arg(std::isnan(imMoins) ? "" : QString::number(imMoins, 'e', 10))
+                                .arg(sey);
+            tableau2Lignes.append(ligne);
+        }
+
+        int maxLignes = tableau1Lignes.size();
+        for (int i = 0; i < maxLignes; ++i) {
+            QString ligneTableau1 = tableau1Lignes.value(i, ";;;;");
+            QString ligneTableau2 = (i < tableau2Lignes.size()) ? tableau2Lignes[i] : ";;;";
+            out << ligneTableau1 << ";;" << ligneTableau2 << "\n";
+        }
+        for (int i = maxLignes; i < tableau2Lignes.size(); ++i) {
+            out << ";;;;;;" << tableau2Lignes[i] << "\n";
+        }
+        fichier.flush();
+    };
+
+    // Premier balayage
+    performBalayage();
+
+    // Second balayage
     if (polarisation == "+50V") {
         QMessageBox::information(nullptr, "Polarisation requise",
                                  QString("Merci de bien vouloir polariser à -50V avant de commencer."));
+        changerPolarisation();
+        mesuresParEnergie.clear();
+        tableau1Lignes.clear();
+        performBalayage();
     }
 
-    // Changer la polarisation et effectuer le second balayage
-    changerPolarisation();
-    mesuresParEnergie.clear();
-    tableau1Lignes.clear();
-    tableau2Lignes.clear();
-
-    // Second balayage
-    for (double energie = eMin; energie <= eMax; energie += pas) {
-        m_communicationSPECS->envoyer("EN " + QString::number(energie));
-        qDebug() << "Energie appliquée :" << energie;
-
-        attenteAsynchrone(5000);
-
-        QElapsedTimer timer;
-        timer.start();
-
-        while (timer.elapsed() < duree * 1000) {
-            m_communicationPICO->envoyer("READ?");
-            QString intensite = m_communicationPICO->recevoirKeithley6485();
-
-            bool ok;
-            double intensiteNum = intensite.trimmed().toDouble(&ok);
-            if (ok) {
-                mesuresParEnergie[energie].append(intensiteNum);
-            }
-
-            QString timestamp = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
-            double tempsEcoule = timer.elapsed() / 1000.0;
-
-            // Ajouter la ligne au tableau 1
-            QString ligne = QString("%1;%2;%3;%4;%5")
-                                .arg(timestamp)
-                                .arg(QString::number(tempsEcoule, 'f', 2))
-                                .arg(QString::number(energie, 'f', 2))
-                                .arg(polarisation)
-                                .arg(intensite.trimmed());
-            tableau1Lignes.append(ligne);
-
-            qDebug() << "⏱ Mesure :" << timestamp << " | " << tempsEcoule << "s | "
-                     << energie << "eV | " << polarisation << " | " << intensite;
-        }
-
-        // Calculer la moyenne pour cette énergie
-        const QVector<double>& valeurs = mesuresParEnergie[energie];
-        double somme = std::accumulate(valeurs.begin(), valeurs.end(), 0.0);
-        double moyenne = valeurs.isEmpty() ? 0.0 : somme / valeurs.size();
-        moyennes[energie][polarisation] = moyenne;
-    }
-
-    // Écrire les données du second balayage
-    fichier.seek(fichier.size());
-    maxLignes = tableau1Lignes.size();
-
-    // Générer les lignes du tableau 2 pour le second balayage
-    tableau2Lignes.clear();
-    for (auto it = moyennes.begin(); it != moyennes.end(); ++it) {
-        double energie = it.key();
-        double imPlus = it.value().value("+50V", std::numeric_limits<double>::quiet_NaN());
-        double imMoins = it.value().value("-50V", std::numeric_limits<double>::quiet_NaN());
-        QString sey;
-
-        if (!std::isnan(imPlus) && !std::isnan(imMoins) && imPlus != 0) {
-            double seyVal = 1 - (imMoins / imPlus);
-            sey = QString::number(seyVal, 'f', 6);
-        }
-
-        // Générer la ligne avec Energie (eV) inclus
-        QString ligne = QString("%1;%2;%3;%4")
-                            .arg(QString::number(energie, 'f', 2))
-                            .arg(std::isnan(imPlus) ? "" : QString::number(imPlus, 'e', 10))
-                            .arg(std::isnan(imMoins) ? "" : QString::number(imMoins, 'e', 10))
-                            .arg(sey);
-        tableau2Lignes.append(ligne);
-    }
-
-    // Écrire les lignes des deux tableaux côte à côte pour le second balayage
-    for (int i = 0; i < maxLignes; ++i) {
-        QString ligneTableau1 = tableau1Lignes.value(i, ";;;;");
-        QString ligneTableau2 = (i < tableau2Lignes.size()) ? tableau2Lignes[i] : ";;;";
-        out << ligneTableau1 << ";;" << ligneTableau2 << "\n";
-    }
-
-    // Ajouter les lignes restantes du tableau 2 si nécessaire
-    for (int i = maxLignes; i < tableau2Lignes.size(); ++i) {
-        out << ";;;;;;" << tableau2Lignes[i] << "\n";
-    }
-
-    // Ajouter 3 lignes vides après le 2ème balayage
+    // Ajouter 3 lignes vides
     for (int i = 0; i < 3; ++i) {
         out << "\n";
     }
 
     fichier.close();
-
     changerPolarisation();
-
     qDebug() << "✅ Fichier mis à jour avec tableaux côte à côte et espacement.";
 }
 
