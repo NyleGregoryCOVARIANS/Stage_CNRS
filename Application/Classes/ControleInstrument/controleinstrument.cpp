@@ -106,7 +106,6 @@ void ControleInstrument::changerPolarisation() {
 
 
 
-
 void ControleInstrument::validate_button_clickedPICO(
     const QString& EnergieMin,
     const QString& EnergieMax,
@@ -134,7 +133,9 @@ void ControleInstrument::validate_button_clickedPICO(
 
     QFile fichier("C:/Users/Mesure/Documents/Nyle/mesures_pico.csv");
     if (!fichier.open(QIODevice::ReadWrite | QIODevice::Text)) {
-        qDebug() << "❌ Impossible d'ouvrir le fichier.";
+        qDebug() << "❌ Impossible d'ouvrir le fichier. Vérifier qu'il soit bien fermé.";
+        QMessageBox::information(nullptr, "Demande balayage",
+                                 QString("Impossible d'ouvrir le fichier. Vérifier qu'il soit bien fermé"));
         return;
     }
     QTextStream out(&fichier);
@@ -152,6 +153,8 @@ void ControleInstrument::validate_button_clickedPICO(
             QMessageBox::information(nullptr, "Polarisation requise",
                                      QString("Merci de bien vouloir polariser à %1 avant de commencer.").arg(polarisation));
         }
+
+        emit balayageStatusChanged("Balayage en cours ...");
 
         for (double energie = eMin; energie <= eMax; energie += pas) {
             m_communicationSPECS->envoyer("EN " + QString::number(energie));
@@ -212,16 +215,18 @@ void ControleInstrument::validate_button_clickedPICO(
             tableau2Lignes.append(ligne);
         }
 
-        int maxLignes = tableau1Lignes.size();
+        // Aligner les lignes et éviter la répétition
+        int maxLignes = qMax(tableau1Lignes.size(), tableau2Lignes.size());
         for (int i = 0; i < maxLignes; ++i) {
-            QString ligneTableau1 = tableau1Lignes.value(i, ";;;;");
+            QString ligneTableau1 = (i < tableau1Lignes.size()) ? tableau1Lignes[i] : ";;;;";
             QString ligneTableau2 = (i < tableau2Lignes.size()) ? tableau2Lignes[i] : ";;;";
-            out << ligneTableau1 << ";;" << ligneTableau2 << "\n";
+            // Si c'est une ligne supplémentaire du second tableau, écrire avec champs vides pour le premier
+            if (i >= tableau1Lignes.size()) {
+                out << ";;;;;;" << ligneTableau2 << "\n";
+            } else {
+                out << ligneTableau1 << ";;" << ligneTableau2 << "\n";
+            }
         }
-        for (int i = maxLignes; i < tableau2Lignes.size(); ++i) {
-            out << ";;;;;;" << tableau2Lignes[i] << "\n";
-        }
-        fichier.flush();
     };
 
     // Premier balayage
@@ -242,11 +247,15 @@ void ControleInstrument::validate_button_clickedPICO(
         out << "\n";
     }
 
+    fichier.flush();
     fichier.close();
     changerPolarisation();
-    qDebug() << "✅ Fichier mis à jour avec tableaux côte à côte et espacement.";
-}
+    qDebug() << "✅ Fichier mis à jour avec deux tableaux séparés sans répétition.";
 
+    emit balayageStatusChanged("Balayage terminé");
+    QMessageBox::information(nullptr, "Balayage terminé",
+                             QString("Le balayage est terminé, fichier mesures_pico mis à jour avec deux tableaux séparés."));
+}
 
 
 // Active le mode Operate quand la case est cochée.

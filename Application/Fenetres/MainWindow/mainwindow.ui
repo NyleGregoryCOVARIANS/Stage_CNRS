@@ -24,7 +24,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="SPECS">
        <attribute name="title">
@@ -1994,8 +1994,24 @@ border-color: rgb(0, 0, 255);</string>
          <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
+       <widget class="QLabel" name="labelInformationBalayage">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>620</y>
+          <width>261</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font: 16pt &quot;Segoe UI&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Prêt pour le balayage</string>
+        </property>
+       </widget>
       </widget>
-      <widget class="QWidget" name="tab_3">
+      <widget class="QCustomPlot" name="customPlot">
        <attribute name="title">
         <string>Courbe SEY</string>
        </attribute>
@@ -2027,6 +2043,14 @@ border-color: rgb(0, 0, 255);</string>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header location="global">qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

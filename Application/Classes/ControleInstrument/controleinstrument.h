@@ -33,14 +33,18 @@ public:
         const QString& Duree
         );
 
-
     void changerPolarisation();
-
     void on_checkBoxHV_toggled(bool checked);
     void on_checkBoxOperate_toggled(bool checked);
 
+
+
+
 private slots:
     void attenteAsynchrone(int millisecondes);
+
+signals:
+    void balayageStatusChanged(const QString& status); // Nouveau signal pour le statut du balayage
 
 private:
     Communication* m_communicationSPECS;

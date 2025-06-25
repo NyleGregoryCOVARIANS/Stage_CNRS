@@ -1,5 +1,5 @@
 QT       += core gui
-QT += serialport
+QT += serialport printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,18 +13,20 @@ SOURCES += \
     Classes/Alimentation/alimentation.cpp \
     Classes/Communication/communication.cpp \
     Classes/ControleInstrument/controleinstrument.cpp \
+    Classes/Graphique/qcustomplot.cpp \
     Classes/ReleverMesure/relevermesure.cpp \
     Fenetres/Connexion/fenetreconnexion.cpp \
     main.cpp \
-    Fenetres/MainWindow/mainwindow.cpp \
+    Fenetres/MainWindow/mainwindow.cpp
 
 HEADERS += \
     Classes/Alimentation/alimentation.h \
     Classes/Communication/communication.h \
     Classes/ControleInstrument/controleinstrument.h \
+    Classes/Graphique/qcustomplot.h \
     Classes/ReleverMesure/relevermesure.h \
     Fenetres/Connexion/fenetreconnexion.h \
-    Fenetres/MainWindow/mainwindow.h #\
+    Fenetres/MainWindow/mainwindow.h
 
 FORMS += \
     Fenetres/Connexion/fenetreconnexion.ui \

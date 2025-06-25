@@ -26,6 +26,7 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include <Classes/Graphique/qcustomplot.h>
 
 QT_BEGIN_NAMESPACE
 
@@ -125,7 +126,8 @@ public:
     QVBoxLayout *HeaderPICO;
     QLabel *titrePICO;
     QLabel *labelIntensite_2;
-    QWidget *tab_3;
+    QLabel *labelInformationBalayage;
+    QCustomPlot *customPlot;
     QMenuBar *menubar;
     QToolBar *toolBar;
     QStatusBar *statusbar;
@@ -799,10 +801,14 @@ public:
         labelIntensite_2->setGeometry(QRect(70, 90, 681, 35));
         labelIntensite_2->setFont(font);
         labelIntensite_2->setAlignment(Qt::AlignmentFlag::AlignCenter);
+        labelInformationBalayage = new QLabel(PICO);
+        labelInformationBalayage->setObjectName("labelInformationBalayage");
+        labelInformationBalayage->setGeometry(QRect(280, 620, 261, 51));
+        labelInformationBalayage->setStyleSheet(QString::fromUtf8("font: 16pt \"Segoe UI\";"));
         tabWidget->addTab(PICO, QString());
-        tab_3 = new QWidget();
-        tab_3->setObjectName("tab_3");
-        tabWidget->addTab(tab_3, QString());
+        customPlot = new QCustomPlot();
+        customPlot->setObjectName("customPlot");
+        tabWidget->addTab(customPlot, QString());
 
         verticalLayout->addWidget(tabWidget);
 
@@ -820,7 +826,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -872,8 +878,9 @@ public:
         ValidatePushButtonPICO->setText(QCoreApplication::translate("MainWindow", "Valider", nullptr));
         titrePICO->setText(QCoreApplication::translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt;\">CONFIGURATION PICOAMPEREMETRE</span></p></body></html>", nullptr));
         labelIntensite_2->setText(QCoreApplication::translate("MainWindow", "Intensit\303\251 :", nullptr));
+        labelInformationBalayage->setText(QCoreApplication::translate("MainWindow", "Pr\303\252t pour le balayage", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(PICO), QCoreApplication::translate("MainWindow", "Configuration picoamperemetre", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Courbe SEY", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(customPlot), QCoreApplication::translate("MainWindow", "Courbe SEY", nullptr));
         toolBar->setWindowTitle(QCoreApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi
 
